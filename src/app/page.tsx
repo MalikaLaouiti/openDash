@@ -1,46 +1,46 @@
-// import { CategoryCard } from "@/components/category-card"
+import { CategoryCard } from "@/components/category-card"
 import { DashboardHeader } from "@/components/dashboard-header"
-// import { HeroSection } from "@/components/hero-section"
+import { HeroSection } from "@/components/hero-section"
 // import { StatsOverview } from "@/components/stats-overview"
 
-// const categories = [
-//   {
-//     id: "geography",
-//     title: "🌍 Géographie",
-//     description: "Météo en temps réel, cartes interactives, données géographiques",
-//     href: "/geography",
-//     color: "from-blue-500 to-cyan-500",
-//     apis: ["OpenWeatherMap", "Géolocalisation", "Cartes"],
-//     count: 3,
-//   },
-//   {
-//     id: "technology",
-//     title: "💻 Technologie",
-//     description: "GitHub, NPM, StackOverflow, statistiques de développement",
-//     href: "/technology",
-//     color: "from-purple-500 to-pink-500",
-//     apis: ["GitHub API", "NPM Registry", "StackOverflow"],
-//     count: 4,
-//   },
-//   {
-//     id: "web-networks",
-//     title: "🌐 Web et Réseaux",
-//     description: "Informations IP, DNS, sécurité, performance réseau",
-//     href: "/web-networks",
-//     color: "from-green-500 to-teal-500",
-//     apis: ["IP Geolocation", "DNS Lookup", "SSL Check"],
-//     count: 3,
-//   },
-//   {
-//     id: "economics",
-//     title: "📈 Données Économiques",
-//     description: "Cryptomonnaies, actions, forex, données financières",
-//     href: "/economics",
-//     color: "from-orange-500 to-red-500",
-//     apis: ["CoinGecko", "Alpha Vantage", "Exchange Rates"],
-//     count: 5,
-//   },
-// ]
+const categories = [
+  {
+    id: "geography",
+    title: "🌍 Géographie",
+    description: "Météo en temps réel, cartes interactives, données géographiques",
+    href: "/geography",
+    color: "from-blue-500 to-cyan-500",
+    apis: ["OpenWeatherMap", "Géolocalisation", "Cartes"],
+    count: 3,
+  },
+  {
+    id: "technology",
+    title: "💻 Technologie",
+    description: "GitHub, NPM, StackOverflow, statistiques de développement",
+    href: "/technology",
+    color: "from-purple-500 to-pink-500",
+    apis: ["GitHub API", "NPM Registry", "StackOverflow"],
+    count: 4,
+  },
+  {
+    id: "web-networks",
+    title: "🌐 Web et Réseaux",
+    description: "Informations IP, DNS, sécurité, performance réseau",
+    href: "/web-networks",
+    color: "from-green-500 to-teal-500",
+    apis: ["IP Geolocation", "DNS Lookup", "SSL Check"],
+    count: 3,
+  },
+  {
+    id: "economics",
+    title: "📈 Données Économiques",
+    description: "Cryptomonnaies, actions, forex, données financières",
+    href: "/economics",
+    color: "from-orange-500 to-red-500",
+    apis: ["CoinGecko", "Alpha Vantage", "Exchange Rates"],
+    count: 5,
+  },
+]
 
 export default function HomePage() {
   return (
@@ -48,7 +48,7 @@ export default function HomePage() {
       <DashboardHeader />
 
       <main className="container mx-auto px-6 py-8">
-        {/* <HeroSection /> */}
+        <HeroSection />
         {/* <StatsOverview /> */}
 
         <section className="mt-12">
@@ -62,9 +62,9 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* {categories.map((category) => (
-              // <CategoryCard key={category.id} category={category} />
-            ))} */}
+            {categories.map((category) => (
+              <CategoryCard key={category.id} category={category} />
+            ))}
           </div>
         </section>
       </main>

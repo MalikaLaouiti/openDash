@@ -26,7 +26,7 @@ export function HeroSection() {
             <CardContent className="p-6 text-center">
               <Globe className="h-8 w-8 text-blue-600 mx-auto mb-4" />
               <h3 className="font-semibold text-slate-900 dark:text-slate-100 mb-2">APIs Multiples</h3>
-              <p className="text-sm text-slate-600 dark:text-slate-400">Intégration de plus de 15 APIs différentes</p>
+              <p className="text-sm text-slate-600 dark:text-slate-400">Intégration de 10 APIs différentes</p>
             </CardContent>
           </Card>
 
