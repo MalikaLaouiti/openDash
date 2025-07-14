@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "nodemon server.mjs",
+    "start": "nodemon server/server.mjs",
     "lint": "next lint"
   },
   "dependencies": {
