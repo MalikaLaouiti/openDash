@@ -47,7 +47,7 @@ app.prepare().then(() => {
 
   //loctation
   server.get('/api/locationiq', async (req, res) => {
-    const q = req.query.q || 'Monastir';
+    
     const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.LOCATIONIQ_KEY}&q=${encodeURIComponent(q)}&format=json`;
     try {
       res.json(await (await fetch(url)).json());
