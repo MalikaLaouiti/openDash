@@ -1,16 +1,20 @@
-// hooks/useWeather.ts
 import { apiClient } from '@/lib/api-client';
 import { useApi } from './useApi';
 
-interface WeatherData {
-  // Define your weather data structure here
-  temperature: number;
-  humidity: number;
-  description: string;
+export interface WeatherData {
   city: string;
-  // Add other weather properties as needed
+  country: string;
+  temperature: number;
+  condition: string;
+  humidity: number;
+  windSpeed: number;
+  icon: string;
+  feelsLike: number;
+  pressure: number;
+  visibility: number;
+  sunrise: string;
+  sunset: string;
 }
-
 export function useWeather(city: string = 'Monastir') {
   return useApi<WeatherData>(() => apiClient.getWeather(city), [city]);
 }

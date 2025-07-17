@@ -1,60 +1,26 @@
 "use client"
 
-import { useEffect, useState } from "react"
+// import { useEffect, useState } from "react"
 import { Cloud, Sun, CloudRain, Droplets, Wind, Eye, Gauge, RefreshCw } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Skeleton } from "@/components/ui/skeleton"
-import { Alert, AlertDescription } from "@/components/ui/alert"
+// import { Skeleton } from "@/components/ui/skeleton"
+// import { Alert, AlertDescription } from "@/components/ui/alert"
+import { useWeather } from '@/hooks/useWeather';
 
-interface WeatherData {
-  city: string
-  country: string
-  temperature: number
-  feelsLike: number
-  condition: string
-  humidity: number
-  pressure: number
-  windSpeed: number
-  visibility: number
-  sunrise: string
-  sunset: string
-  icon: string
+
+interface WeatherWidgetProps {
+  city?: string;
 }
 
-export function WeatherCardReal() {
-  const [weather, setWeather] = useState<WeatherData | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const fetchWeather = async () => {
-    try {
-      setLoading(true)
-      setError(null)
+export function WeatherCardReal({ city = 'Tunis' }: WeatherWidgetProps) {
+  const { data: weather, loading, error, refetch } = useWeather(city);
 
-      const response = await fetch("/api/weather?city=Paris")
+  if (loading) return <div>Chargement météo...</div>;
+  if (error) return <div>Erreur: {error}</div>;
+  if (!weather) return null;
 
-      if (!response.ok) {
-        throw new Error("Erreur lors de la récupération des données météo")
-      }
-
-      const data = await response.json()
-
-      if (data.error) {
-        throw new Error(data.error)
-      }
-
-      setWeather(data)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Erreur inconnue")
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    fetchWeather()
-  }, [])
 
   const getWeatherIcon = (condition: string, iconCode: string) => {
     if (iconCode.includes("01")) return <Sun className="h-8 w-8 text-yellow-500" />
@@ -65,47 +31,7 @@ export function WeatherCardReal() {
     return <Sun className="h-8 w-8 text-yellow-500" />
   }
 
-  if (loading) {
-    return (
-      <Card className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20">
-        <CardHeader>
-          <CardTitle className="flex items-center justify-between">
-            <span>🌤️ Météo en Temps Réel</span>
-            <Skeleton className="h-8 w-8 rounded-full" />
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <Skeleton className="h-4 w-24" />
-          <Skeleton className="h-8 w-16" />
-          <div className="grid grid-cols-2 gap-4">
-            <Skeleton className="h-4 w-full" />
-            <Skeleton className="h-4 w-full" />
-          </div>
-        </CardContent>
-      </Card>
-    )
-  }
-
-  if (error) {
-    return (
-      <Card className="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20">
-        <CardHeader>
-          <CardTitle className="text-red-900 dark:text-red-100">❌ Erreur Météo</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Alert>
-            <AlertDescription>{error}</AlertDescription>
-          </Alert>
-          <Button onClick={fetchWeather} className="w-full mt-4 bg-transparent" variant="outline">
-            <RefreshCw className="h-4 w-4 mr-2" />
-            Réessayer
-          </Button>
-        </CardContent>
-      </Card>
-    )
-  }
-
-  if (!weather) return null
+  
 
   return (
     <Card className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 border-blue-200 dark:border-blue-800">
@@ -114,7 +40,7 @@ export function WeatherCardReal() {
           <span className="text-blue-900 dark:text-blue-100">🌤️ Météo en Temps Réel</span>
           <div className="flex items-center gap-2">
             {getWeatherIcon(weather.condition, weather.icon)}
-            <Button onClick={fetchWeather} size="sm" variant="ghost">
+            <Button onClick={refetch} size="sm" variant="ghost">
               <RefreshCw className="h-4 w-4" />
             </Button>
           </div>

@@ -1,10 +1,11 @@
 import next from 'next';
 import express from 'express';
 
-const port = 3001;
+const port = 3000;
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
-
+const handle = app.getRequestHandler();
+ 
 app.prepare().then(() => {
   const server = express();
 
@@ -47,14 +48,24 @@ app.prepare().then(() => {
 
   //loctation
   server.get('/api/locationiq', async (req, res) => {
-    
-    const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.LOCATIONIQ_KEY}&q=${encodeURIComponent(q)}&format=json`;
+    const key = process.env.LOCATIONIQ_KEY;
+    if (!key) {
+      return res.status(500).json({ error: 'Missing LOCATIONIQ_KEY in environment' });
+    }
+
+    const q = req.query.q || 'Paris';
+    const url = `https://us1.locationiq.com/v1/search.php?key=${key}&q=${encodeURIComponent(q)}&format=json`;
+
     try {
-      res.json(await (await fetch(url)).json());
+      const response = await fetch(url);
+      const data = await response.json();
+      res.json(data);
     } catch (e) {
       res.status(500).json({ error: e.message });
     }
   });
+
+
   
   //github
   server.get('/api/github', async (req, res) => {
@@ -131,12 +142,15 @@ app.prepare().then(() => {
     }
   });
 
-
-  
-
-  server.get('/', (req, res) => {
-    res.json('Hello from Express');
+  server.get('/hello', (req, res) => {
+    res.json({ message: 'Hello from the API!' });
   });
+  
+  server.all(/(.*)/, (req, res) => {
+    return handle(req, res);
+  });
+
+ 
 
   server.listen(port, () => {
     console.log(`🚀 Ready on http://localhost:${port}`);
