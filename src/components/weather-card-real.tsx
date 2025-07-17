@@ -14,7 +14,7 @@ interface WeatherWidgetProps {
   city?: string;
 }
 
-export function WeatherCardReal({ city = 'Tunis' }: WeatherWidgetProps) {
+export function WeatherCardReal({ city = 'Monastir' }: WeatherWidgetProps) {
   const { data: weather, loading, error, refetch } = useWeather(city);
 
   if (loading) return <div>Chargement météo...</div>;

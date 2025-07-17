@@ -1,5 +1,5 @@
 import { API_BASE_URL, API_ENDPOINTS } from './api-config';
-
+import { WeatherData } from '@/hooks/useWeather';
 type RequestOptions = RequestInit & {
   headers?: Record<string, string>;
 };
@@ -34,8 +34,28 @@ class ApiClient {
     }
   }
 
-  async getWeather(city = 'Monastir') {
-    return this.request(`${API_ENDPOINTS.weather}?city=${encodeURIComponent(city)}`);
+  async  getWeather(city: string): Promise<WeatherData> {
+    const res = await fetch(`/api/weather?city=${encodeURIComponent(city)}`);
+    if (!res.ok) {
+      throw new Error('Failed to fetch weather data');
+    }
+
+    const data = await res.json();
+
+    return {
+      city: data.name,
+      country: data.sys.country,
+      temperature: data.main.temp,
+      feelsLike: data.main.feels_like,
+      condition: data.weather[0]?.main || '',
+      humidity: data.main.humidity,
+      pressure: data.main.pressure,
+      windSpeed: data.wind.speed,
+      visibility: data.visibility,
+      icon: data.weather[0]?.icon ,
+      sunrise: new Date(data.sys.sunrise * 1000).toISOString().substring(11, 19),
+      sunset: new Date(data.sys.sunset * 1000).toISOString().substring(11, 19),
+    };
   }
 
   async getOpenMeteo(lat = '48.85', lon = '2.35') {
