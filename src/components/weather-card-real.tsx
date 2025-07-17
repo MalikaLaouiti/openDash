@@ -27,7 +27,6 @@ export function WeatherCardReal() {
   const [weather, setWeather] = useState<WeatherData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-
   const fetchWeather = async () => {
     try {
       setLoading(true)
