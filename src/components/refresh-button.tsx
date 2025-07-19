@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useWeatherContext } from "@/components/WeatherContext";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+// import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RefreshCw } from "lucide-react";
 import { useState } from "react";
 
@@ -22,11 +22,9 @@ export function RefreshButton() {
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-lg">🔄 Actualisation</CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
+    
+      
+      <div className="space-y-4">
         <Button onClick={handleRefresh} disabled={isRefreshing} className="w-full">
           <RefreshCw className={`h-4 w-4 mr-2 ${isRefreshing ? "animate-spin" : ""}`} />
           {isRefreshing ? "Actualisation..." : "Rafraîchir les données"}
@@ -37,7 +35,7 @@ export function RefreshButton() {
             Dernière actualisation : {lastUpdated.toLocaleString()}
           </p>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    
   );
 }

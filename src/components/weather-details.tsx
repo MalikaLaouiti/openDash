@@ -59,7 +59,7 @@ export function WeatherDetails() {
   ]
 
   return (
-    <Card>
+    <Card className="h-full">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">🌡️ Détails Météorologiques</CardTitle>
       </CardHeader>

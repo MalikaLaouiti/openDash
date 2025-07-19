@@ -16,6 +16,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useOpenMeteo } from "@/hooks/useOpenMeteo";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { useWeatherContext } from "@/components/WeatherContext";
+import { RefreshButton } from "@/components/refresh-button"
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Legend, Filler);
 
@@ -34,7 +35,7 @@ interface WeatherChartData {
 }
 
 export function WeatherChart() {
-  const { data: weather, loading, error, refetch } = useOpenMeteo(35.78, 10.83); // Monastir
+  const { data: weather, loading, error, refetch } = useOpenMeteo(35.78, 10.83); 
 
   const [weatherData, setWeatherData] = useState<WeatherChartData | null>(null);
   const { setRefetchers } = useWeatherContext();
@@ -96,7 +97,7 @@ export function WeatherChart() {
         display: true,
         text: "Prévisions Météo - 7 Jours",
         font: {
-          size: 16,
+          size: 18,
           weight: "bold" as const,
         },
       },
@@ -161,15 +162,16 @@ export function WeatherChart() {
 
   return (
 
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">📊 Graphique Météorologique</CardTitle>
+    <Card className="h-full">
+      <CardHeader className="grid grid-cols-3 gap-4 items-center">
+        <CardTitle className="lg:col-span-2 flex items-center gap-4">📊 Graphique Météorologique</CardTitle>
+        <RefreshButton />
       </CardHeader>
       <CardContent>
-        <div className="h-64 flex justify-center">
+        <div className="mt-4 h-84 flex justify-center space-y-8">
           <Line data={weatherData} options={options} />
         </div>
-        <div className="flex justify-between mt-4">
+        <div className="flex justify-between mt-8 mr-7 ml-7">
           {weather?.daily.precipitation_sum.map((precip, idx) => (
             <Tooltip key={idx}>
               <TooltipTrigger className="text-sm text-muted-foreground">💧{precip} mm</TooltipTrigger>
@@ -179,6 +181,7 @@ export function WeatherChart() {
             </Tooltip>
           ))}
         </div>
+        
       </CardContent>
     </Card>
 
