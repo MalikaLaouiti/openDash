@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef,useState } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -15,6 +15,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useOpenMeteo } from "@/hooks/useOpenMeteo";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
+import { useWeatherContext } from "@/components/WeatherContext";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Legend, Filler);
 
@@ -28,16 +29,25 @@ interface WeatherChartData {
     fill: boolean;
     tension: number;
     yAxisID: string;
-    
+
   }[];
 }
 
 export function WeatherChart() {
-  const { data: weather, loading, error } = useOpenMeteo(35.78, 10.83); // Monastir
-  console.log("Weather data:", weather);
+  const { data: weather, loading, error, refetch } = useOpenMeteo(35.78, 10.83); // Monastir
 
   const [weatherData, setWeatherData] = useState<WeatherChartData | null>(null);
+  const { setRefetchers } = useWeatherContext();
+  const refetchRef = useRef(refetch);
 
+  useEffect(() => {
+    refetchRef.current = refetch;
+  }, [refetch]);
+
+  useEffect(() => {
+    setRefetchers(() => refetchRef.current);
+  }, [setRefetchers]);
+  
   // Met à jour les données du graphique quand les données météo arrivent
   useEffect(() => {
     if (!weather) return;
@@ -150,7 +160,7 @@ export function WeatherChart() {
   if (!weatherData) return null;
 
   return (
-    
+
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">📊 Graphique Météorologique</CardTitle>
@@ -160,18 +170,18 @@ export function WeatherChart() {
           <Line data={weatherData} options={options} />
         </div>
         <div className="flex justify-between mt-4">
-        {weather?.daily.precipitation_sum.map((precip, idx) => (
-        <Tooltip key={idx}>
-          <TooltipTrigger className="text-sm text-muted-foreground">💧{precip} mm</TooltipTrigger>
-          <TooltipContent>
-            {weather.daily.time[idx]}  
-          </TooltipContent>
-        </Tooltip>
-      ))}
-    </div>
+          {weather?.daily.precipitation_sum.map((precip, idx) => (
+            <Tooltip key={idx}>
+              <TooltipTrigger className="text-sm text-muted-foreground">💧{precip} mm</TooltipTrigger>
+              <TooltipContent>
+                {weather.daily.time[idx]}
+              </TooltipContent>
+            </Tooltip>
+          ))}
+        </div>
       </CardContent>
     </Card>
-    
+
 
   );
 }

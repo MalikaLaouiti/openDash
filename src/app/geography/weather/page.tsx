@@ -1,12 +1,14 @@
 import { Suspense } from "react"
 import { WeatherChart } from "@/components/weather-chart"
-// import { WeatherDetails } from "@/components/weather-details"
-// import { RefreshButton } from "@/components/refresh-button"
+import { WeatherDetails } from "@/components/weather-details"
+import { RefreshButton } from "@/components/refresh-button"
 // import { JsonViewer } from "@/components/json-viewer"
 // import { DetailHeader } from "@/components/detail-header"
+import { WeatherProvider } from "@/components/WeatherContext"
 
 export default function WeatherDetailPage() {
   return (
+    <WeatherProvider>
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-900 dark:to-slate-800">
       <div className="container mx-auto px-6 py-8">
         {/* <DetailHeader
@@ -24,10 +26,10 @@ export default function WeatherDetailPage() {
 
           <div className="space-y-6">
             <Suspense fallback={<div>Chargement des détails...</div>}>
-              {/* <WeatherDetails /> */}
+              <WeatherDetails />
             </Suspense>
 
-            {/* <RefreshButton apiEndpoint="/api/weather" /> */}
+            <RefreshButton />
           </div>
         </div>
 
@@ -38,5 +40,6 @@ export default function WeatherDetailPage() {
         </div>
       </div>
     </div>
+    </WeatherProvider>
   )
 }

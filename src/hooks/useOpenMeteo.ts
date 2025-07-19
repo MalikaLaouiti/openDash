@@ -26,5 +26,5 @@ export interface OpenMeteoData {
 
 
 export function useOpenMeteo(lat: number, lon: number) {
-  return useApi<OpenMeteoData>(() => apiClient.getOpenMeteo(lat, lon), [lat, lon]);
+  return useApi<OpenMeteoData>(() => apiClient.getOpenMeteo(), [lat, lon]);
 }
