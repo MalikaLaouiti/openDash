@@ -15,8 +15,9 @@ export default function WeatherDetailPage() {
   return (
     <WeatherProvider>
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-900 dark:to-slate-800">
+      <DashboardHeader/>
       <div className="container mx-auto px-6 py-8">
-        <DashboardHeader/>
+        
         <DetailHeader
           title="🌤️ Météo Détaillée"
           description="Analyse complète des conditions météorologiques"
