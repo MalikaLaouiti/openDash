@@ -2,14 +2,19 @@
 import { apiClient } from '@/lib/api-client';
 import { useApi } from './useApi';
 
-interface OpenMeteoData {
-  // Define your Open Meteo data structure here
-  current_weather: {
+export interface OpenMeteoData {
+  latitude: number;
+  longitude: number;
+  timezone: string;
+  currentWeather: {
     temperature: number;
-    windspeed: number;
-    weathercode: number;
+    windSpeed: number;
+    windDirection: number;
+    weatherCode: number;
+    isDay: number;
   };
-  // Add other Open Meteo properties as needed
+  daily: number; // tu peux préciser le type si tu connais la structure
+  hourly: number;
 }
 
 export function useOpenMeteo(lat: number, lon: number) {

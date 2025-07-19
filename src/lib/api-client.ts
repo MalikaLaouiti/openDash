@@ -1,5 +1,6 @@
 import { API_BASE_URL, API_ENDPOINTS } from './api-config';
 import { WeatherData } from '@/hooks/useWeather';
+import { OpenMeteoData } from '@/hooks/useOpenMeteo';
 type RequestOptions = RequestInit & {
   headers?: Record<string, string>;
 };
@@ -58,8 +59,29 @@ class ApiClient {
     };
   }
 
-  async getOpenMeteo(lat = '48.85', lon = '2.35') {
-    return this.request(`${API_ENDPOINTS.openMeteo}?lat=${lat}&lon=${lon}`);
+  async getOpenMeteo(lat = 48.85, lon = 2.35): Promise<OpenMeteoData> {
+    const res = await fetch(`/api/open-weather?lat=${lat}&lon=${lon}`);
+    if (!res.ok) {
+      throw new Error('Failed to fetch weather data');
+    }
+
+    const data = await res.json();
+
+    return {
+      latitude: data.latitude,
+      longitude: data.longitude,
+      timezone: data.timezone,
+      currentWeather: {
+        temperature: data.current_weather.temperature,
+        windSpeed: data.current_weather.windspeed,
+        windDirection: data.current_weather.winddirection,
+        weatherCode: data.current_weather.weathercode,
+        isDay: data.current_weather.is_day,
+      },
+      daily: data.daily,
+      hourly: data.hourly,
+    };  
+    
   }
 
   async getLocation(query = 'Monastir') {
