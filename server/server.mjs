@@ -36,8 +36,8 @@ app.prepare().then(() => {
 
   //open-meteo
   server.get('/api/open-meteo', async (req, res) => {
-    const lat = req.query.lat || '48.85', lon = req.query.lon || '2.35';
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+    const lat = req.query.lat || '35.78', lon = req.query.lon || '10.83';
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=Europe/Paris`;
     try {
       const data = await (await fetch(url)).json();
       res.json(data);

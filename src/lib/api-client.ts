@@ -59,8 +59,8 @@ class ApiClient {
     };
   }
 
-  async getOpenMeteo(lat = 48.85, lon = 2.35): Promise<OpenMeteoData> {
-    const res = await fetch(`/api/open-weather?lat=${lat}&lon=${lon}`);
+  async getOpenMeteo(): Promise<OpenMeteoData> {
+    const res = await fetch(`/api/open-meteo`);
     if (!res.ok) {
       throw new Error('Failed to fetch weather data');
     }
@@ -71,15 +71,22 @@ class ApiClient {
       latitude: data.latitude,
       longitude: data.longitude,
       timezone: data.timezone,
-      currentWeather: {
-        temperature: data.current_weather.temperature,
-        windSpeed: data.current_weather.windspeed,
-        windDirection: data.current_weather.winddirection,
-        weatherCode: data.current_weather.weathercode,
-        isDay: data.current_weather.is_day,
+      timezone_abbreviation: data.timezone_abbreviation,
+      elevation: data.elevation,
+      generationtime_ms: data.generationtime_ms,
+      utc_offset_seconds: data.utc_offset_seconds,
+      daily_units: {
+        time: 'iso8601',
+        temperature_2m_max: '°C',
+        temperature_2m_min: '°C',
+        precipitation_sum: 'mm',
       },
-      daily: data.daily,
-      hourly: data.hourly,
+      daily: {
+        time: data.daily.time,
+        temperature_2m_max: data.daily.temperature_2m_max,
+        temperature_2m_min: data.daily.temperature_2m_min,
+        precipitation_sum: data.daily.precipitation_sum,
+      },
     };  
     
   }
