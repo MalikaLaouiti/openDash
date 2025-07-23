@@ -1,19 +1,44 @@
 import { apiClient } from '@/lib/api-client';
 import { useApi } from './useApi';
 
-interface IpInfo {
+export interface IpWhoisResponse {
   ip: string;
-  hostname: string;
-  city: string;
-  region: string;
+  success: boolean;
+  type: string; // "IPv4"
+  continent: string;
+  continent_code: string;
   country: string;
-  loc: string; // "lat,lon" format
-  org: string;
+  country_code: string;
+  region: string;
+  region_code: string;
+  city: string;
+  latitude: number;
+  longitude: number;
+  is_eu: boolean;
   postal: string;
-  timezone: string;
-  // Add other IP info properties as needed
+  calling_code: string;
+  capital: string;
+  borders: string;
+  flag: {
+    img: string;
+    emoji: string;
+    emoji_unicode: string;
+  };
+  connection: {
+    asn: number;
+    org: string;
+    isp: string;
+  };
+  timezone: {
+    id: string;
+    abbr: string;
+    is_dst: boolean;
+    offset: number;
+    utc: string;
+  };
 }
 
+
 export function useIpInfo() {
-  return useApi<IpInfo>(() => apiClient.getIpInfo(), []);
+  return useApi<IpWhoisResponse>(() => apiClient.getIpInfo(), []);
 }

@@ -53,7 +53,7 @@ app.prepare().then(() => {
       return res.status(500).json({ error: 'Missing LOCATIONIQ_KEY in environment' });
     }
 
-    const q = req.query.q || 'Paris';
+    const q = req.query.q || 'Monastir';
     const url = `https://us1.locationiq.com/v1/search.php?key=${key}&q=${encodeURIComponent(q)}&format=json`;
 
     try {
