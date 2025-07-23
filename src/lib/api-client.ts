@@ -36,7 +36,7 @@ class ApiClient {
   }
 
   async  getWeather(city: string): Promise<WeatherData> {
-    const res = await fetch(`${API_ENDPOINTS.weather}?city=${encodeURIComponent(city)}`);
+    const res = await fetch(`/api/weather?city=${encodeURIComponent(city)}`);
     if (!res.ok) {
       throw new Error('Failed to fetch weather data');
     }
@@ -60,7 +60,7 @@ class ApiClient {
   }
 
   async getOpenMeteo(): Promise<OpenMeteoData> {
-    const res = await fetch(API_ENDPOINTS.openMeteo);
+    const res = await fetch('/api/open-meteo');
     if (!res.ok) {
       throw new Error('Failed to fetch weather data');
     }
@@ -92,12 +92,14 @@ class ApiClient {
   }
 
   async getIpInfo() {
-    const res = await fetch(API_ENDPOINTS.ipwhois);
+    const res = await fetch('/api/ipwhois');
+    console.log("IP Info URL:", );
+    
     if (!res.ok) {
       throw new Error('Failed to fetch weather data');
     }
     const data = await res.json();
-
+    console.log("IP Info Response:", data);
     return {
       ip: data.ip,
       success: data.success,
@@ -136,8 +138,8 @@ class ApiClient {
     };
   }
 
-  async getLocation(query = 'Monastir') {
-    const res = await fetch(`${API_ENDPOINTS.locationIQ}?q=${encodeURIComponent(query)}`);
+  async getLocation([lat, lon]: [number, number]) {
+    const res = await fetch(`/api/locationiq?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}&format=json`);
     if (!res.ok) {
       throw new Error('Failed to fetch weather data');
     }

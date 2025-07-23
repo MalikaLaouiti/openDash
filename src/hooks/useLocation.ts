@@ -18,6 +18,15 @@ export interface  LocationData {
 }
 
 
-export function useLocation(query: string = 'Monastir') {
-  return useApi<LocationData>(() => apiClient.getLocation(query), [query]);
+export function useLocation(lat?: number, lon?: number) {
+  const shouldFetch = lat !== undefined && lon !== undefined;
+
+  return useApi<LocationData>(
+    () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if (!shouldFetch) return Promise.resolve(null as any); // or throw, or whatever fits your logic
+      return apiClient.getLocation([lat!, lon!]);
+    },
+    [lat, lon]
+  );
 }
