@@ -36,7 +36,7 @@ class ApiClient {
   }
 
   async  getWeather(city: string): Promise<WeatherData> {
-    const res = await fetch(`/api/weather?city=${encodeURIComponent(city)}`);
+    const res = await fetch(`${API_ENDPOINTS.weather}?city=${encodeURIComponent(city)}`);
     if (!res.ok) {
       throw new Error('Failed to fetch weather data');
     }
@@ -60,7 +60,7 @@ class ApiClient {
   }
 
   async getOpenMeteo(): Promise<OpenMeteoData> {
-    const res = await fetch(`/api/open-meteo`);
+    const res = await fetch(API_ENDPOINTS.openMeteo);
     if (!res.ok) {
       throw new Error('Failed to fetch weather data');
     }
@@ -96,7 +96,6 @@ class ApiClient {
     if (!res.ok) {
       throw new Error('Failed to fetch weather data');
     }
-
     const data = await res.json();
 
     return {
@@ -138,7 +137,26 @@ class ApiClient {
   }
 
   async getLocation(query = 'Monastir') {
-    return this.request(`${API_ENDPOINTS.locationIQ}?q=${encodeURIComponent(query)}`);
+    const res = await fetch(`${API_ENDPOINTS.locationIQ}?q=${encodeURIComponent(query)}`);
+    if (!res.ok) {
+      throw new Error('Failed to fetch weather data');
+    }
+    const data = await res.json();
+
+    return{
+      place_id: data.place_id,
+      licence: data.licence,
+      osm_type: data.osm_type,
+      osm_id: data.osm_id,
+      boundingbox: data.boundingbox,
+      lat: data.lat.toString(), // as string
+      lon: data.lon.toString(), // as string
+      display_name: data.display_name,
+      class: data.class,
+      type: data.type,
+      importance: data.importance,
+      icon: data.icon
+    }
   }
 
   async getCountries() {

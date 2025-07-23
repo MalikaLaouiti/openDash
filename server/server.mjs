@@ -53,8 +53,13 @@ app.prepare().then(() => {
       return res.status(500).json({ error: 'Missing LOCATIONIQ_KEY in environment' });
     }
 
-    const q = req.query.q || 'Monastir';
-    const url = `https://us1.locationiq.com/v1/search.php?key=${key}&q=${encodeURIComponent(q)}&format=json`;
+    const lat = req.query.lat;
+    const lon = req.query.lon;
+
+    if (!lat || !lon) {
+      return res.status(400).json({ error: 'Missing lat or lon in query parameters' });
+    }
+    const url = `https://us1.locationiq.com/v1/reverse.php?key=${key}&lat=${lat}&lon=${lon}&format=json`;
 
     try {
       const response = await fetch(url);
