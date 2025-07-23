@@ -1,25 +1,14 @@
 import { MapPin, Navigation } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { useIpInfo } from "@/hooks/useIpInfo"; 
 
-async function getLocationData() {
-  await new Promise((resolve) => setTimeout(resolve, 800))
 
-  return {
-    city: "Paris",
-    country: "France",
-    coordinates: {
-      lat: 48.8566,
-      lon: 2.3522,
-    },
-    timezone: "Europe/Paris",
-    region: "Île-de-France",
-  }
-}
 
-export async function MapCard() {
-  const location = await getLocationData()
-
+export function MapCard() {
+  
+  const { data: location  } = useIpInfo();
+  if (!location) return null;
   return (
     <Card className="bg-gradient-to-br from-green-50 to-emerald-100 dark:from-green-900/20 dark:to-emerald-800/20 border-green-200 dark:border-green-800">
       <CardHeader className="pb-3">
@@ -43,20 +32,20 @@ export async function MapCard() {
               <Navigation className="h-4 w-4 text-green-600" />
               <div>
                 <p className="font-medium">Latitude</p>
-                <p className="text-green-800 dark:text-green-200">{location.coordinates.lat}</p>
+                <p className="text-green-800 dark:text-green-200">{location.latitude}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <Navigation className="h-4 w-4 text-green-600" />
               <div>
                 <p className="font-medium">Longitude</p>
-                <p className="text-green-800 dark:text-green-200">{location.coordinates.lon}</p>
+                <p className="text-green-800 dark:text-green-200">{location.longitude}</p>
               </div>
             </div>
           </div>
 
           <div className="text-center text-xs text-green-700 dark:text-green-300">
-            Fuseau horaire: {location.timezone}
+            Fuseau horaire:{new Date(location.timezone?.current_time).toLocaleTimeString()}
           </div>
         </div>
       </CardContent>

@@ -1,13 +1,12 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-
-import { useIpInfo } from "@/hooks/useIpInfo"; // Ton hook ip info
+import Image from "next/image";
+import { useIpInfo } from "@/hooks/useIpInfo"; 
 
 export function LocationDetails() {
-  const { data: ipInfo, loading, error,  } = useIpInfo();
+  const { data: ipInfo, loading, error  } = useIpInfo();
   
-
   if (loading) return <div>Chargement des infos IP...</div>;
   if (error) return <div>Erreur: {error}</div>;
   if (!ipInfo) return null;
@@ -58,7 +57,7 @@ export function LocationDetails() {
         <div className="grid grid-cols-2 gap-4 pt-4 border-t">
           <div className="text-center">
             <p className="text-xs text-slate-600 dark:text-slate-400">Drapeau</p>
-            <img src={ipInfo.flag?.img} alt={`Drapeau ${ipInfo.country}`} className="inline-block h-8" />
+            <Image src={ipInfo.flag?.img} alt={`Drapeau ${ipInfo.country}`} className="inline-block h-8" />
           </div>
           <div className="text-center">
             <p className="text-xs text-slate-600 dark:text-slate-400">Opérateur réseau</p>
