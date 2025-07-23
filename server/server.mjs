@@ -53,8 +53,8 @@ app.prepare().then(() => {
       return res.status(500).json({ error: 'Missing LOCATIONIQ_KEY in environment' });
     }
 
-    const lat = req.query.lat;
-    const lon = req.query.lon;
+    const lat = req.query.lat || '35.766';
+    const lon = req.query.lon|| '10.836';
 
     if (!lat || !lon) {
       return res.status(400).json({ error: 'Missing lat or lon in query parameters' });

@@ -1,3 +1,4 @@
+"use client";
 import { MapPin, Navigation } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -27,25 +28,25 @@ export function MapCard() {
             </Badge>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 text-sm">
+          <div className="grid grid-cols-2 gap-4 text-sm ">
             <div className="flex items-center gap-2">
               <Navigation className="h-4 w-4 text-green-600" />
-              <div>
+              <div >
                 <p className="font-medium">Latitude</p>
-                <p className="text-green-800 dark:text-green-200">{location.latitude}</p>
+                <p className="text-green-800 dark:text-green-200 ">{location.latitude.toFixed(3)}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <Navigation className="h-4 w-4 text-green-600" />
-              <div>
+              <div >
                 <p className="font-medium">Longitude</p>
-                <p className="text-green-800 dark:text-green-200">{location.longitude}</p>
+                <p className="text-green-800 dark:text-green-200">{location.longitude.toFixed(3)}</p>
               </div>
             </div>
           </div>
 
-          <div className="text-center text-xs text-green-700 dark:text-green-300">
-            Fuseau horaire:{new Date(location.timezone?.current_time).toLocaleTimeString()}
+          <div className="text-center text-s text-green-700 dark:text-green-300">
+            Fuseau horaire: {new Date(location.timezone?.current_time).toLocaleTimeString()}
           </div>
         </div>
       </CardContent>

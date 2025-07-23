@@ -57,7 +57,7 @@ export function LocationDetails() {
         <div className="grid grid-cols-2 gap-4 pt-4 border-t">
           <div className="text-center">
             <p className="text-xs text-slate-600 dark:text-slate-400">Drapeau</p>
-            <Image src={ipInfo.flag?.img} alt={`Drapeau ${ipInfo.country}`} className="inline-block h-8" />
+            <Image src={ipInfo.flag?.img} alt={`Drapeau ${ipInfo.country}`} className="inline-block h-8" width={80} height={75}/>
           </div>
           <div className="text-center">
             <p className="text-xs text-slate-600 dark:text-slate-400">Opérateur réseau</p>
