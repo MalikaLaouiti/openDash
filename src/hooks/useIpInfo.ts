@@ -35,6 +35,7 @@ export interface IpWhoisResponse {
     is_dst: boolean;
     offset: number;
     utc: string;
+    current_time: string; 
   };
 }
 

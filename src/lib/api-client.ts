@@ -133,7 +133,8 @@ class ApiClient {
         abbr: data.timezone.abbr,
         is_dst: data.timezone.is_dst,
         offset: data.timezone.offset,
-        utc: data.timezone.utc
+        utc: data.timezone.utc,
+        current_time: data.timezone.current_time
       }
     };
   }
