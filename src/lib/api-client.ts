@@ -91,6 +91,52 @@ class ApiClient {
     
   }
 
+  async getIpInfo() {
+    const res = await fetch(API_ENDPOINTS.ipwhois);
+    if (!res.ok) {
+      throw new Error('Failed to fetch weather data');
+    }
+
+    const data = await res.json();
+
+    return {
+      ip: data.ip,
+      success: data.success,
+      type: data.type,
+      continent: data.continent,
+      continent_code: data.continent_code,
+      country: data.country,
+      country_code: data.country_code,
+      region: data.region,
+      region_code: data.region_code,
+      city: data.city,
+      latitude: data.latitude,
+      longitude: data.longitude,
+      is_eu: data.is_eu,
+      postal: data.postal,
+      calling_code: data.calling_code,
+      capital: data.capital,
+      borders: data.borders,
+      flag: {
+        img: data.flag.img,
+        emoji: data.flag.emoji,
+        emoji_unicode: data.flag.emoji_unicode
+      },
+      connection: {
+        asn: data.connection.asn,
+        org: data.connection.org,
+        isp: data.connection.isp
+      },
+      timezone: {
+        id: data.timezone.id,
+        abbr: data.timezone.abbr,
+        is_dst: data.timezone.is_dst,
+        offset: data.timezone.offset,
+        utc: data.timezone.utc
+      }
+    };
+  }
+
   async getLocation(query = 'Monastir') {
     return this.request(`${API_ENDPOINTS.locationIQ}?q=${encodeURIComponent(query)}`);
   }
@@ -111,9 +157,7 @@ class ApiClient {
     return this.request(`${API_ENDPOINTS.stackoverflow}?tag=${tag}`);
   }
 
-  async getIpInfo() {
-    return this.request(API_ENDPOINTS.ipWhois);
-  }
+  
 
   async getDnsInfo(domain = 'example.com') {
     return this.request(`${API_ENDPOINTS.dns}?domain=${domain}`);
