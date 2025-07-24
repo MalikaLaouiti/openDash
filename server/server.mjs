@@ -76,8 +76,8 @@ app.prepare().then(() => {
     if (!countryCode) { 
       return res.status(400).json({ error: 'Missing country code in query parameters' });
     }
+    const url= `https://api.worldbank.org/v2/country/${countryCode}/indicator/EN.POP.DNST?format=json`;
     try {
-      const url= `https://api.worldbank.org/v2/country/${countryCode}/indicator/EN.POP.DNST?format=json`;
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error('Network response was not ok');
