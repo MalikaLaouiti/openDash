@@ -11,7 +11,7 @@ app.prepare().then(() => {
 
   server.get('/api/countries', async (req, res) => {
   try {
-    const response = await fetch('https://restcountries.com/v3.1/independent?status=true&fields=languages,capital');
+    const response = await fetch('https://restcountries.com/v3.1/independent?status=true');
     const data = await response.json();
     res.status(200).json(data);
   } catch (error) {

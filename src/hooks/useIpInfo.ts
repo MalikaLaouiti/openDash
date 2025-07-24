@@ -4,7 +4,7 @@ import { useApi } from './useApi';
 export interface IpWhoisResponse {
   ip: string;
   success: boolean;
-  type: string; // "IPv4"
+  type: string; 
   continent: string;
   continent_code: string;
   country: string;

@@ -3,12 +3,16 @@ import { MapPin, Navigation } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { useIpInfo } from "@/hooks/useIpInfo"; 
+import { Button } from "@/components/ui/button"
+import { RefreshCw } from "lucide-react"
 
 
 
 export function MapCard() {
   
-  const { data: location  } = useIpInfo();
+  const { data: location,loading, error, refetch  } = useIpInfo();
+  if (loading) return <div>Chargement données de localisation...</div>;
+  if (error) return <div>Erreur: {error}</div>;
   if (!location) return null;
   return (
     <Card className="bg-gradient-to-br from-green-50 to-emerald-100 dark:from-green-900/20 dark:to-emerald-800/20 border-green-200 dark:border-green-800">
@@ -16,6 +20,9 @@ export function MapCard() {
         <CardTitle className="flex items-center gap-2 text-green-900 dark:text-green-100">
           <MapPin className="h-5 w-5" />
           Géolocalisation
+          <Button onClick={refetch} size="sm" variant="ghost">
+            <RefreshCw className="h-4 w-4 " />
+          </Button>
         </CardTitle>
       </CardHeader>
       <CardContent>

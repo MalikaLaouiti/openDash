@@ -1,4 +1,6 @@
 import { Globe, Clock, Users } from "lucide-react"
+// import { Button } from "@/components/ui/button"
+// import { RefreshCw } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 async function getLocationStats() {
@@ -23,6 +25,9 @@ export async function LocationCard() {
         <CardTitle className="flex items-center gap-2 text-purple-900 dark:text-purple-100">
           <Globe className="h-5 w-5" />
           Informations Géographiques
+          {/* <Button onClick={refetch} size="sm" variant="ghost">
+              <RefreshCw className="h-4 w-4" />
+          </Button> */}
         </CardTitle>
       </CardHeader>
       <CardContent>
