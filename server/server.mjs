@@ -70,6 +70,26 @@ app.prepare().then(() => {
     }
   });
 
+  //Informations Géographiques
+  server.get('/api/worldBank', async (req, res) => {
+    const countryCode = req.query.country || 'TN'; // Default to Tunisia
+    if (!countryCode) { 
+      return res.status(400).json({ error: 'Missing country code in query parameters' });
+    }
+    try {
+      const url= `https://api.worldbank.org/v2/country/${countryCode}/indicator/EN.POP.DNST?format=json`;
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      res.status(200).json(data[1]);
+    }
+    catch (error) {
+      console.error('[World Bank API Error]:', error);
+      res.status(500).json({ error: 'Failed to fetch data from World Bank API' });
+    }
+  });
 
   
   //github
