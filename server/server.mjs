@@ -10,7 +10,7 @@ app.prepare().then(() => {
   const server = express();
 
   server.get('/api/countries', async (req, res) => {
-    const code = req.query.code || 'TN'; 
+    const code = req.query.code ; 
     const url = `https://restcountries.com/v3.1/alpha/${code}`;
     if (!code) {
       return res.status(400).json({ error: 'Missing country code in query parameters' });
@@ -18,12 +18,14 @@ app.prepare().then(() => {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      res.status(200).json(data);
+      res.status(200).json(data[0]);
     } catch (error) {
       console.error('[Countries API Error]:', error);
       res.status(500).json({ error: 'Failed to fetch countries' });
       }
   });
+
+
   //meteo
   server.get('/api/weather', async (req, res) => {
     const city = req.query.city || 'Monastir';
@@ -79,7 +81,7 @@ app.prepare().then(() => {
   server.get('/api/worldBank', async (req, res) => {
     const countryCode = req.query.country || 'TN'; // Default to Tunisia
     const url= `https://api.worldbank.org/v2/country/${countryCode}/indicator/EN.POP.DNST?format=json`;
-    
+
     if (!countryCode) { 
       return res.status(400).json({ error: 'Missing country code in query parameters' });
     }

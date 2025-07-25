@@ -152,8 +152,8 @@ class ApiClient {
       osm_type: data.osm_type,
       osm_id: data.osm_id,
       boundingbox: data.boundingbox,
-      lat: data.lat.toString(), // as string
-      lon: data.lon.toString(), // as string
+      lat: data.lat.toString(), 
+      lon: data.lon.toString(), 
       display_name: data.display_name,
       class: data.class,
       type: data.type,
@@ -162,8 +162,40 @@ class ApiClient {
     }
   }
 
-  async getCountries() {
-    return this.request(API_ENDPOINTS.countries);
+  async getCountries(countryCode?: string) {
+    const code = countryCode || 'FR'; 
+    const res = await fetch(`/api/countries?code=${code}`);
+    if (!res.ok) {
+      throw new Error('Failed to fetch countries data');
+    } 
+    const data = await res.json();
+    console.log(" Data:", data);
+
+    return {
+      name: {
+        common: data.name.common,
+        official: data.name.official,
+        nativeName: data.name.nativeName
+      },
+      tld: data.tld,  
+      currencies: data.currencies,
+      capital: data.capital,
+      region: data.region,
+      subregion: data.subregion,
+      population: data.population,
+      gini: data.gini,
+      flags: {
+        png: data.flags.png,
+        svg: data.flags.svg,
+        alt: data.flags.alt
+      },
+      coatOfArms: data.coatOfArms,
+      borders: data.borders,
+      area: data.area,
+      languages: data.languages,
+      translations: data.translations,
+      timezones: data.timezones
+    };  
   }
 
   async getGithubRepos(user = 'vercel') {

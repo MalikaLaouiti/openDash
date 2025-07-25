@@ -1,22 +1,56 @@
 import { apiClient } from '@/lib/api-client';
 import { useApi } from './useApi';
 
-interface Country {
+export interface Country {
   name: {
     common: string;
     official: string;
+    nativeName: {
+      [langCode: string]: {
+        official: string;
+        common: string;
+      };
+    };
+  };
+  tld?: string[];
+  currencies?: {
+    [currencyCode: string]: {
+      name: string;
+      symbol: string;
+    };
   };
   capital: string[];
   region: string;
   subregion: string;
   population: number;
+  gini?: {
+    [year: string]: number;
+  };
   flags: {
     png: string;
     svg: string;
+    alt?: string;
   };
-  // Add other country properties as needed
+  coatOfArms?: {
+    png?: string;
+    svg?: string;
+  };
+  borders?: string[];
+  area: number;
+  languages?: {
+    [code: string]: string;
+  };
+  translations?: {
+    [langCode: string]: {
+      official: string;
+      common: string;
+    };
+  };
+  timeZone?:string[];
+ 
 }
 
-export function useCountries() {
-  return useApi<Country[]>(() => apiClient.getCountries(), []);
+export function useCountries(countryCode?: string) {
+  console.log("Fetching country data for:", countryCode);
+  return useApi<Country>(() => apiClient.getCountries(countryCode), [countryCode]);
 }
