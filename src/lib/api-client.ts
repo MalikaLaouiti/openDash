@@ -180,7 +180,7 @@ class ApiClient {
       tld: data.tld,  
       currencies: data.currencies,
       capital: data.capital,
-      region: data.region,
+      continents: data.region,
       subregion: data.subregion,
       population: data.population,
       gini: data.gini,
