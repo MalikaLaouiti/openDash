@@ -20,7 +20,7 @@ export interface Country {
     };
   };
   capital: string[];
-  continents: string;
+  region: string;
   subregion: string;
   population: number;
   gini?: {
@@ -46,7 +46,7 @@ export interface Country {
       common: string;
     };
   };
-  timezones?:string[];
+  timeZone?:string[];
  
 }
 

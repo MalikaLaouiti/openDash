@@ -49,12 +49,12 @@ export  function LocationCard() {
 
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-purple-700 dark:text-purple-300">Nom du pays :</span>
-              <span className="font-medium text-purple-900 dark:text-purple-100">{stats?. name.nativeName[Object.keys(stats.name.nativeName)[0]].official}</span>
+              <span className="text-purple-700 dark:text-purple-300">Capitale:</span>
+              <span className="font-medium text-purple-900 dark:text-purple-100">{stats?.capital}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-purple-700 dark:text-purple-300">Continent :</span>
-              <span className="font-medium text-purple-900 dark:text-purple-100">{stats?.continents}</span>
+              <span className="text-purple-700 dark:text-purple-300">Continent:</span>
+              <span className="font-medium text-purple-900 dark:text-purple-100">{stats?.region}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-purple-700 dark:text-purple-300"> Langue officielle:</span>
@@ -71,9 +71,7 @@ export  function LocationCard() {
 
           <div className="flex items-center justify-center gap-2 pt-2 border-t border-purple-200 dark:border-purple-700">
             <Clock className="h-4 w-4 text-purple-600" />
-            <span className="text-sm text-purple-700 dark:text-purple-300">
-              {stats?.timezones && stats.timezones.length > 0 ? stats.timezones[0] : "Fuseau horaire inconnu"}
-            </span>
+            <span className="text-sm text-purple-700 dark:text-purple-300">{stats?.timeZone?.[0]}</span>
           </div>
         </div>
       </CardContent>
