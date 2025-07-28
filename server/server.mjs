@@ -1,7 +1,7 @@
 import next from 'next';
 import express from 'express';
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
@@ -186,7 +186,7 @@ app.prepare().then(() => {
 
  
 
-  server.listen(port, () => {
+  server.listen(port,'0.0.0.0', () => {
     console.log(`🚀 Ready on http://localhost:${port}`);
   });
 
