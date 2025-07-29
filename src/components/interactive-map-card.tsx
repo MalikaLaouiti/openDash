@@ -7,8 +7,9 @@ import "leaflet/dist/leaflet.css"
 import { useIpInfo } from "@/hooks/useIpInfo"
 import { useLocation } from "@/hooks/useLocation"
 import Image from 'next/image'
+import { ErrorAlert } from "@/components/error-alert";
+import {DataLoader} from "@/components/load-data";
 
-// Fix pour les icônes Leaflet par défaut
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 delete (L.Icon.Default.prototype as any)._getIconUrl
 L.Icon.Default.mergeOptions({
@@ -33,7 +34,7 @@ export default function InteractiveMapCard({
     
 
     useEffect(() => {
-        if (!mapRef.current || mapInstanceRef.current || !location) return
+        if (!mapRef.current || mapInstanceRef.current || !location) return;
 
         const mapCenter = {
             lat: parseFloat(location.lat),
@@ -61,9 +62,9 @@ export default function InteractiveMapCard({
         }
     }, [location, zoom])
 
-    if (loading) return <div>Chargement de la carte...</div>
-    if (error) return <div>Erreur: {error}</div>
-    if (!location) return null
+    if (loading) return <DataLoader message= "Chargement de la carte..."/>
+    if (error) return <ErrorAlert error={error} />
+    if (!location) return <ErrorAlert error="Aucune information de localisation disponible." />
 
     const lat = parseFloat(location.lat)
     const lon = parseFloat(location.lon)
@@ -77,7 +78,7 @@ export default function InteractiveMapCard({
                 <div
                     ref={mapRef}
                     style={{ height }}
-                    className="w-full rounded-lg border border-gray-200 overflow-hidden"
+                    className="w-full rounded-lg border border-gray-200 overflow-hidden z-40"
                 />
                 <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
                     <div className="flex items-center justify-center gap-2 mb-2">
@@ -89,7 +90,7 @@ export default function InteractiveMapCard({
                         <Image
                             src={location.icon ?? "/location.png"}
                             alt="Location icon"
-                            width={16}  // or 20, matching your design
+                            width={16}  
                             height={16}
                             className="inline-block mr-2"
                         />

@@ -5,21 +5,19 @@ import { RefreshCw } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useCountries } from "@/hooks/useCountries"
 import { useIpInfo } from "@/hooks/useIpInfo";
+import { ErrorAlert } from "@/components/error-alert";
+import  {DataLoader}  from "@/components/load-data";
 
 
 
 export  function LocationCard() {
   const { data: country } = useIpInfo();
-  
-
   const countryCode = country?.country_code;
-
   const { data: stats, loading, error,refetch } = useCountries(countryCode);
   
-
-  if (loading) return <div>Chargement d&apos;Informations...</div>;
-  if (error) return <div>Erreur: {error}</div>;
-  if (!location) return null;
+  if (loading) return <DataLoader message= "Chargement d'Informations..."/>
+  if (error) return <ErrorAlert error={error} />;
+  if (!location) return <ErrorAlert error="Aucune donnée géographique disponible." />;
 
   return (
     <Card className="bg-gradient-to-br from-purple-50 to-violet-100 dark:from-purple-900/20 dark:to-violet-800/20 border-purple-200 dark:border-purple-800">

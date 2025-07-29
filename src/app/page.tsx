@@ -1,7 +1,6 @@
 import { CategoryCard } from "@/components/category-card"
-import { DashboardHeader } from "@/components/dashboard-header"
 import { HeroSection } from "@/components/hero-section"
-// import { StatsOverview } from "@/components/stats-overview"
+
 
 const categories = [
   {
@@ -44,13 +43,8 @@ const categories = [
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
-      <DashboardHeader />
-
       <main className="container mx-auto px-6 py-8">
         <HeroSection />
-        {/* <StatsOverview /> */}
-
         <section className="mt-12">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-4">
@@ -68,6 +62,5 @@ export default function HomePage() {
           </div>
         </section>
       </main>
-    </div>
   )
 }

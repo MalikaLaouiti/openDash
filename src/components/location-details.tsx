@@ -2,14 +2,17 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
-import { useIpInfo } from "@/hooks/useIpInfo"; 
+import { useIpInfo } from "@/hooks/useIpInfo";
+import { DataLoader } from "@/components/load-data";
+import { ErrorAlert } from "@/components/error-alert"; 
 
 export function LocationDetails() {
   const { data: ipInfo, loading, error  } = useIpInfo();
   
-  if (loading) return <div>Chargement des infos IP...</div>;
-  if (error) return <div>Erreur: {error}</div>;
-  if (!ipInfo) return null;
+
+  if (loading) return <DataLoader message="Chargement des données de localisation..." />
+  if (error) return <ErrorAlert error={error} />
+  if (!ipInfo) return <ErrorAlert error="Aucune information IP disponible." />
 
   return (
     <Card className="h-full">

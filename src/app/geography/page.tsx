@@ -2,9 +2,8 @@ import { Suspense } from "react"
 import { WeatherCardReal } from "@/components/weather-card-real"
 import { MapCard } from "@/components/map-card"
 import { LocationCard } from "@/components/location-card"
-// import { PageHeader } from "@/components/page-header"
 import { ApiGrid } from "@/components/api-grid"
-import { DashboardHeader } from "@/components/dashboard-header"
+
 
 export default function GeographyPage() {
   const apis = [
@@ -35,8 +34,7 @@ export default function GeographyPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-900 dark:to-slate-800">
-        <DashboardHeader/>
+    <div>
         <div className="container mx-auto px-6 py-8">
             <div className="text-center py-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 mb-4">🌍 Géographie</h1>

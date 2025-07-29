@@ -6,14 +6,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 interface JsonViewerProps {
-  data: object | null; 
+  data: object | null;
   title: string;
-  apiUrl?: string; // URL optionnelle de l'API
+  apiUrl?: string;
 }
 
 export function JsonViewer({ data, title, apiUrl }: JsonViewerProps) {
   const [copied, setCopied] = useState(false);
-
   const copyToClipboard = async () => {
     if (!data) return;
     await navigator.clipboard.writeText(JSON.stringify(data, null, 2));
@@ -51,8 +50,13 @@ export function JsonViewer({ data, title, apiUrl }: JsonViewerProps) {
       )}
       <CardContent>
         <div className="bg-slate-900 dark:bg-slate-800 rounded-lg p-4 overflow-auto max-h-96">
+
           <pre className="text-sm text-green-400 font-mono">
-            {data ? JSON.stringify(data, null, 2) : "Chargement..."}
+            {data === null
+              ? "Aucune donnée disponible."
+              : data
+                ? JSON.stringify(data, null, 2)
+                : " Chargement..."}
           </pre>
         </div>
       </CardContent>

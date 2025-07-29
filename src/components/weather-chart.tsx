@@ -17,6 +17,8 @@ import { useOpenMeteo } from "@/hooks/useOpenMeteo";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { useWeatherContext } from "@/components/WeatherContext";
 import { RefreshButton } from "@/components/refresh-button"
+import { ErrorAlert } from "@/components/error-alert";
+import { DataLoader } from "@/components/load-data";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Legend, Filler);
 
@@ -51,7 +53,7 @@ export function WeatherChart() {
   
   // Met à jour les données du graphique quand les données météo arrivent
   useEffect(() => {
-    if (!weather) return;
+    if (!weather) return ;
 
     const labels = weather.daily.time.map((date: string) =>
       new Date(date).toLocaleDateString("fr-FR", {
@@ -138,27 +140,10 @@ export function WeatherChart() {
   };
 
   // Loading, error, ou pas encore de données
-  if (loading) {
-    return (
-      <Card>
-        <CardContent className="p-6">
-          <div className="animate-pulse h-64 bg-slate-200 dark:bg-slate-700 rounded" />
-        </CardContent>
-      </Card>
-    );
-  }
+  if (loading) return <DataLoader message="Chargement des données météo..."/>;
 
-  if (error) {
-    return (
-      <Card>
-        <CardContent className="p-6 text-red-500">
-          Erreur lors du chargement des données météo : {error}
-        </CardContent>
-      </Card>
-    );
-  }
-
-  if (!weatherData) return null;
+  if (error) return <ErrorAlert error={error} />;
+  if (!weatherData) return <ErrorAlert error="Aucune donnée météo disponible." />;
 
   return (
 

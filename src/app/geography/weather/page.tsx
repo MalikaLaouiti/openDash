@@ -5,7 +5,6 @@ import { WeatherDetails } from "@/components/weather-details"
 import { JsonViewer } from "@/components/json-viewer"
 import { DetailHeader } from "@/components/detail-header"
 import { WeatherProvider } from "@/components/WeatherContext"
-import { DashboardHeader } from "@/components/dashboard-header"
 import { useOpenMeteo } from "@/hooks/useOpenMeteo";
 import { useWeather } from "@/hooks/useWeather";
 
@@ -14,10 +13,7 @@ export default function WeatherDetailPage() {
   const { data: weatherData } = useWeather('Monastir'); 
   return (
     <WeatherProvider>
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-900 dark:to-slate-800">
-      <DashboardHeader/>
       <div className="container mx-auto px-6 py-8">
-        
         <DetailHeader
           title="🌤️ Météo Détaillée"
           description="Analyse complète des conditions météorologiques"
@@ -57,7 +53,6 @@ export default function WeatherDetailPage() {
           </Suspense>
         </div>
       </div>
-    </div>
     </WeatherProvider>
   )
 }

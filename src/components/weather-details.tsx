@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge"
 import { useWeather } from "@/hooks/useWeather"
 import { useEffect,useRef } from "react"
 import { useWeatherContext } from "@/components/WeatherContext"
+import { ErrorAlert } from "@/components/error-alert"
+import {DataLoader} from "@/components/load-data"
 
 
 
@@ -20,9 +22,9 @@ export function WeatherDetails() {
   useEffect(() => {
     setRefetchers(() => refetchRef.current);
   }, [setRefetchers]);
-  if (loading) return <div>Chargement météo...</div>;
-  if (error) return <div>Erreur: {error}</div>;
-  if (!weather) return null;
+  if (loading) return <DataLoader message= "Chargement météo..."/>;
+  if (error) return <ErrorAlert error={error} />;
+  if (!weather) return <ErrorAlert error="Aucune donnée météo disponible." />;
   
 
   const details = [

@@ -5,15 +5,17 @@ import { Badge } from "@/components/ui/badge"
 import { useIpInfo } from "@/hooks/useIpInfo"; 
 import { Button } from "@/components/ui/button"
 import { RefreshCw } from "lucide-react"
+import { DataLoader } from "@/components/load-data";
+import { ErrorAlert  } from "@/components/error-alert";
 
 
 
 export function MapCard() {
   
   const { data: location,loading, error, refetch  } = useIpInfo();
-  if (loading) return <div>Chargement données de localisation...</div>;
-  if (error) return <div>Erreur: {error}</div>;
-  if (!location) return null;
+  if (loading) return <DataLoader message="Chargement données de localisation..."/>;
+  if (error) return <ErrorAlert error={error} />;
+  if (!location) return <ErrorAlert error="Aucune donnée de localisation disponible" />;
   return (
     <Card className="bg-gradient-to-br from-green-50 to-emerald-100 dark:from-green-900/20 dark:to-emerald-800/20 border-green-200 dark:border-green-800">
       <CardHeader className="pb-3">

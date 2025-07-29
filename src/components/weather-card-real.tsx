@@ -5,6 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { useWeather } from '@/hooks/useWeather';
+import { ErrorAlert } from "@/components/error-alert";
+import {DataLoader} from "@/components/load-data"
+
 
 
 interface WeatherWidgetProps {
@@ -14,9 +17,9 @@ interface WeatherWidgetProps {
 export function WeatherCardReal({ city = 'Monastir' }: WeatherWidgetProps) {
   const { data: weather, loading, error, refetch } = useWeather(city);
 
-  if (loading) return <div>Chargement météo...</div>;
-  if (error) return <div>Erreur: {error}</div>;
-  if (!weather) return null;
+  if (loading) return <DataLoader message="Chargement de données" />;
+  if (error) return <ErrorAlert error={error} />;
+  if (!weather) return <ErrorAlert error="Aucune donnée météo disponible." />;
 
 
   const getWeatherIcon = (condition: string, iconCode: string) => {
