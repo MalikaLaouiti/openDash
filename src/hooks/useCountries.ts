@@ -51,6 +51,6 @@ export interface Country {
 }
 
 export function useCountries(countryCode?: string) {
-  console.log("Fetching country data for:", countryCode);
+  
   return useApi<Country>(() => apiClient.getCountries(countryCode), [countryCode]);
 }

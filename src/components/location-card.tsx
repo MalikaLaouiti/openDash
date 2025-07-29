@@ -10,12 +10,12 @@ import { useIpInfo } from "@/hooks/useIpInfo";
 
 export  function LocationCard() {
   const { data: country } = useIpInfo();
-  console.log("Country Data:", country);
+  
 
   const countryCode = country?.country_code;
 
   const { data: stats, loading, error,refetch } = useCountries(countryCode);
-  console.log("Country Stats:", stats);
+  
 
   if (loading) return <div>Chargement d&apos;Informations...</div>;
   if (error) return <div>Erreur: {error}</div>;
