@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef,useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -31,13 +31,11 @@ interface WeatherChartData {
     backgroundColor: string;
     fill: boolean;
     tension: number;
-    yAxisID: string;
-
   }[];
 }
 
 export function WeatherChart() {
-  const { data: weather, loading, error, refetch } = useOpenMeteo(35.78, 10.83); 
+  const { data: weather, loading, error, refetch } = useOpenMeteo(35.78, 10.83);
 
   const [weatherData, setWeatherData] = useState<WeatherChartData | null>(null);
   const { setRefetchers } = useWeatherContext();
@@ -50,10 +48,10 @@ export function WeatherChart() {
   useEffect(() => {
     setRefetchers(() => refetchRef.current);
   }, [setRefetchers]);
-  
+
   // Met à jour les données du graphique quand les données météo arrivent
   useEffect(() => {
-    if (!weather) return ;
+    if (!weather) return;
 
     const labels = weather.daily.time.map((date: string) =>
       new Date(date).toLocaleDateString("fr-FR", {
@@ -73,7 +71,6 @@ export function WeatherChart() {
           backgroundColor: "rgba(59, 130, 246, 0.1)",
           fill: true,
           tension: 0.4,
-          yAxisID: "y",
         },
         {
           label: "Température Min (°C)",
@@ -82,7 +79,6 @@ export function WeatherChart() {
           backgroundColor: "rgba(16, 185, 129, 0.1)",
           fill: true,
           tension: 0.4,
-          yAxisID: "y1",
         },
       ],
     });
@@ -121,27 +117,20 @@ export function WeatherChart() {
         position: "left" as const,
         title: {
           display: true,
-          text: "Température Max (°C)",
+          text: "Températures Min / Max (°C)", 
         },
-      },
-      y1: {
-        type: "linear" as const,
-        display: true,
-        position: "right" as const,
-        title: {
-          display: true,
-          text: "Température Min (°C)",
+        ticks: {
+          stepSize: 2,
         },
-        grid: {
-          drawOnChartArea: false,
-        },
+        suggestedMin: Math.min(...weather!.daily.temperature_2m_min) - 2,
+        suggestedMax: Math.max(...weather!.daily.temperature_2m_max) + 2,
       },
     },
+
   };
 
-  // Loading, error, ou pas encore de données
-  if (loading) return <DataLoader message="Chargement des données météo..."/>;
 
+  if (loading) return <DataLoader message="Chargement des données météo..." />;
   if (error) return <ErrorAlert error={error} />;
   if (!weatherData) return <ErrorAlert error="Aucune donnée météo disponible." />;
 
@@ -166,7 +155,7 @@ export function WeatherChart() {
             </Tooltip>
           ))}
         </div>
-        
+
       </CardContent>
     </Card>
 
