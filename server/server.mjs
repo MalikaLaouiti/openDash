@@ -21,13 +21,11 @@ app.get('/api/countries', async (req, res) => {
 
 app.get('/api/weather', async (req, res) => {
   const city = req.query.city || 'Monastir';
-  console.log('Fetching weather for city:', city);
   const apiKey = process.env.OPENWEATHERMAP_API_KEY;
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
   try {
     const response = await fetch(url);
     const data = await response.json();
-    console.log('Weather data:', data);
     res.status(200).json(data);
   } catch (error) {
     console.error('[Weather API]', error);

@@ -93,13 +93,11 @@ class ApiClient {
 
   async getIpInfo() {
     const res = await fetch('/api/ipwhois');
-    console.log("IP Info URL:", );
     
     if (!res.ok) {
       throw new Error('Failed to fetch weather data');
     }
     const data = await res.json();
-    console.log("IP Info Response:", data);
     return {
       ip: data.ip,
       success: data.success,
@@ -169,7 +167,6 @@ class ApiClient {
       throw new Error('Failed to fetch countries data');
     } 
     const data = await res.json();
-    console.log(" Data:", data);
 
     return {
       name: {
