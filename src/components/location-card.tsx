@@ -1,5 +1,5 @@
 "use client";
-import { Globe, Clock, Users } from "lucide-react"
+import { Globe, Users } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { RefreshCw } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -65,11 +65,6 @@ export  function LocationCard() {
               </span>
 
             </div>
-          </div>
-
-          <div className="flex items-center justify-center gap-2 pt-2 border-t border-purple-200 dark:border-purple-700">
-            <Clock className="h-4 w-4 text-purple-600" />
-            <span className="text-sm text-purple-700 dark:text-purple-300">{stats?.timeZone?.[0]}</span>
           </div>
         </div>
       </CardContent>
