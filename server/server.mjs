@@ -121,7 +121,9 @@ app.get('/api/stackoverflow', async (req, res) => {
 
 app.get('/api/ipwhois', async (req, res) => {
   try {
-    const response = await fetch('https://ipwho.is/');
+    const forwarded = req.headers["x-forwarded-for"];
+    const ip = typeof forwarded === "string" ? forwarded.split(",")[0] : "197.25.89.64";
+    const response = await fetch(`https://ipwho.is/${ip}`);
     const data = await response.json();
     res.json(data);
   } catch (e) {
