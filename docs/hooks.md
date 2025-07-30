@@ -2,7 +2,7 @@
 
 Cette section documente tous les hooks React personnalisés utilisés dans Open-Dash.
 
-## 📋 Vue d'Ensemble
+Les hooks personnalisés sont comme des petits assistants qui nous aident à gérer les données et l'état de notre application. Ils encapsulent la logique réutilisable et simplifient la gestion d'état dans les composants.
 
 Les hooks personnalisés encapsulent la logique réutilisable et simplifient la gestion d'état dans les composants.
 
@@ -18,14 +18,19 @@ import { useWeather } from "@/hooks/useWeather"
 const { weather, loading, error, refetch } = useWeather(city)
 ```
 
-**Paramètres :**
-- `city` (string, optionnel) : Ville pour les données météo
+**🎯 Ce qu'il fait :**
+- Récupère les données météo en temps réel
+- Gère automatiquement le chargement et les erreurs
+- Permet de rafraîchir les données à la demande
 
-**Retour :**
-- `weather` : Données météo actuelles
-- `loading` : État de chargement
-- `error` : Erreur éventuelle
-- `refetch` : Fonction de rafraîchissement
+**📝 Paramètres :**
+- `city` (string, optionnel) : Ville pour les données météo (défaut: "Monastir")
+
+**🎁 Ce qu'il vous donne :**
+- `weather` : Données météo complètes (température, humidité, vent, etc.)
+- `loading` : État de chargement (parfait pour les spinners !)
+- `error` : Erreur éventuelle (pour informer l'utilisateur)
+- `refetch` : Fonction de rafraîchissement (pour mettre à jour les données)
 
 **Utilisation :**
 ```tsx
@@ -46,36 +51,56 @@ const WeatherComponent = () => {
 
 ### useLocation
 
-Gère la géolocalisation et les informations de localisation.
+Besoin de savoir où vous êtes ? Notre hook `useLocation` est votre GPS personnel ! 🗺️
 
 ```tsx
 import { useLocation } from "@/hooks/useLocation"
 
-const { location, loading, error, updateLocation } = useLocation()
+const { location, loading, error, updateLocation } = useLocation(lat, lon)
 ```
 
-**Retour :**
-- `location` : Coordonnées et informations de localisation
+**🎯 Ce qu'il fait :**
+- Récupère les informations détaillées d'une localisation
+- Gère la géolocalisation inverse (coordonnées → adresse)
+- Fournit des données géographiques complètes
+
+**📝 Paramètres :**
+- `lat` (number, optionnel) : Latitude
+- `lon` (number, optionnel) : Longitude
+
+**🎁 Ce qu'il vous donne :**
+- `location` : Informations complètes (adresse, pays, importance, etc.)
 - `loading` : État de chargement
 - `error` : Erreur éventuelle
 - `updateLocation` : Fonction de mise à jour
 
 ### useCountries
 
-Récupère les informations sur les pays.
+Récupère les informations sur un ou plusieurs pays. 
 
 ```tsx
 import { useCountries } from "@/hooks/useCountries"
 
-const { countries, loading, error, getCountry } = useCountries()
+const { countries, loading, error, getCountry } = useCountries(countryCode)
 ```
 
-**Méthodes :**
-- `getCountry(code)` : Récupère un pays par son code ISO
+**🎯 Ce qu'il fait :**
+- Récupère les informations détaillées sur les pays
+- Fournit des données complètes (drapeaux, capitales, populations, etc.)
+- Permet de rechercher par code pays ISO
 
-### useOpenMeteo
+**📝 Paramètres :**
+- `countryCode` (string, optionnel) : Code ISO du pays (ex: "TN", "FR", "US")
 
-Gère les données de l'API Open-Meteo.
+**🎁 Ce qu'il vous donne :**
+- `countries` : Informations complètes du pays (nom, capitale, population, drapeaux, etc.)
+- `loading` : État de chargement
+- `error` : Erreur éventuelle
+- `getCountry` : Fonction pour récupérer un pays spécifique
+
+### 🌦️ useOpenMeteo - Nos Prévisions Météo
+
+Les prévisions météo, c'est notre spécialité ! Le hook `useOpenMeteo` vous donne les prévisions sur 7 jours ! 🌦️
 
 ```tsx
 import { useOpenMeteo } from "@/hooks/useOpenMeteo"
@@ -83,9 +108,19 @@ import { useOpenMeteo } from "@/hooks/useOpenMeteo"
 const { forecast, loading, error } = useOpenMeteo(lat, lon)
 ```
 
-**Paramètres :**
-- `lat` (number) : Latitude
-- `lon` (number) : Longitude
+**🎯 Ce qu'il fait :**
+- Récupère les prévisions météo sur 7 jours
+- Fournit les températures min/max et précipitations
+- Données gratuites et précises
+
+**📝 Paramètres :**
+- `lat` (number) : Latitude de la localisation
+- `lon` (number) : Longitude de la localisation
+
+**🎁 Ce qu'il vous donne :**
+- `forecast` : Prévisions détaillées (températures, précipitations, etc.)
+- `loading` : État de chargement
+- `error` : Erreur éventuelle
 
 ## 💻 Hooks Technologie
 
@@ -96,24 +131,46 @@ Gère les données de l'API GitHub.
 ```tsx
 import { useGithub } from "@/hooks/useGithub"
 
-const { repos, loading, error, getUserRepos } = useGithub()
+const { repos, loading, error, getUserRepos } = useGithub(user)
 ```
 
-**Méthodes :**
-- `getUserRepos(username)` : Récupère les dépôts d'un utilisateur
+**🎯 Ce qu'il fait :**
+- Récupère les dépôts GitHub d'un utilisateur
+- Fournit des informations détaillées (stars, forks, langage, etc.)
+- Permet d'explorer les projets open source
 
-### useStackOverflow
+**📝 Paramètres :**
+- `user` (string, optionnel) : Nom d'utilisateur GitHub (défaut: "vercel")
 
-Gère les données de Stack Overflow.
+**🎁 Ce qu'il vous donne :**
+- `repos` : Liste des dépôts avec toutes les informations
+- `loading` : État de chargement
+- `error` : Erreur éventuelle
+- `getUserRepos` : Fonction pour récupérer les dépôts d'un utilisateur
+
+### 💬 useStackOverflow - Notre Assistant Programmation
+
+Besoin d'aide en programmation ? Notre hook `useStackOverflow` vous connecte à la communauté des développeurs ! 💬
 
 ```tsx
 import { useStackOverflow } from "@/hooks/useStackOverflow"
 
-const { questions, loading, error, searchQuestions } = useStackOverflow()
+const { questions, loading, error, searchQuestions } = useStackOverflow(tag)
 ```
 
-**Méthodes :**
-- `searchQuestions(query)` : Recherche des questions
+**🎯 Ce qu'il fait :**
+- Récupère les questions Stack Overflow par tag
+- Fournit des informations détaillées (score, réponses, vues, etc.)
+- Permet d'explorer les solutions de la communauté
+
+**📝 Paramètres :**
+- `tag` (string, optionnel) : Tag de recherche (défaut: "javascript")
+
+**🎁 Ce qu'il vous donne :**
+- `questions` : Liste des questions avec toutes les informations
+- `loading` : État de chargement
+- `error` : Erreur éventuelle
+- `searchQuestions` : Fonction pour rechercher des questions
 
 ## 🌐 Hooks Web & Réseaux
 
@@ -127,8 +184,18 @@ import { useIpInfo } from "@/hooks/useIpInfo"
 const { ipInfo, loading, error } = useIpInfo()
 ```
 
-**Retour :**
-- `ipInfo` : Informations sur l'adresse IP (pays, ville, ISP, etc.)
+**🎯 Ce qu'il fait :**
+- Récupère les informations détaillées sur votre adresse IP
+- Fournit la géolocalisation, l'ISP, le fuseau horaire, etc.
+- Permet de comprendre votre connexion internet
+
+**📝 Paramètres :**
+- Aucun paramètre requis (utilise automatiquement votre IP)
+
+**🎁 Ce qu'il vous donne :**
+- `ipInfo` : Informations complètes (pays, ville, ISP, fuseau horaire, etc.)
+- `loading` : État de chargement
+- `error` : Erreur éventuelle
 
 ## 📈 Hooks Économiques
 
@@ -142,8 +209,19 @@ import { useCrypto } from "@/hooks/useCrypto"
 const { cryptoData, loading, error, getCryptoPrice } = useCrypto()
 ```
 
-**Méthodes :**
-- `getCryptoPrice(symbol)` : Récupère le prix d'une cryptomonnaie
+**🎯 Ce qu'il fait :**
+- Récupère les données de cryptomonnaies en temps réel
+- Fournit les prix, capitalisations, variations, etc.
+- Permet de suivre l'évolution des marchés crypto
+
+**📝 Paramètres :**
+- Aucun paramètre requis (récupère les principales cryptomonnaies)
+
+**🎁 Ce qu'il vous donne :**
+- `cryptoData` : Données complètes des cryptomonnaies
+- `loading` : État de chargement
+- `error` : Erreur éventuelle
+- `getCryptoPrice` : Fonction pour récupérer le prix d'une crypto spécifique
 
 ## 🔧 Hook Générique
 
@@ -154,12 +232,24 @@ Hook générique pour les appels API.
 ```tsx
 import { useApi } from "@/hooks/useApi"
 
-const { data, loading, error, refetch } = useApi(endpoint, options)
+const { data, loading, error, refetch } = useApi(apiCall, dependencies)
 ```
 
-**Paramètres :**
-- `endpoint` (string) : Point de terminaison de l'API
-- `options` (object, optionnel) : Options de configuration
+**🎯 Ce qu'il fait :**
+- Gère automatiquement les appels API
+- Fournit les états de chargement et d'erreur
+- Permet de rafraîchir les données facilement
+- Optimise les performances avec la mémoisation
+
+**📝 Paramètres :**
+- `apiCall` (function) : Fonction qui retourne une Promise
+- `dependencies` (array, optionnel) : Dépendances pour le re-fetch
+
+**🎁 Ce qu'il vous donne :**
+- `data` : Données récupérées de l'API
+- `loading` : État de chargement
+- `error` : Erreur éventuelle
+- `refetch` : Fonction pour rafraîchir les données
 
 **Options :**
 ```tsx

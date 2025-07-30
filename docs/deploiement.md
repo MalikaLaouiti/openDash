@@ -1,6 +1,14 @@
 # 🚀 Guide de Déploiement
 
-Ce guide vous accompagne dans le déploiement d'Open-Dash sur différentes plateformes.
+Salut ! 👋 Prêt à déployer Open-Dash ? Ce guide vous accompagne dans le déploiement sur différentes plateformes.
+
+## 🎉 Site Déployé !
+
+**Open-Dash est déjà en ligne !** 🌐
+
+- **🌍 Site Principal** : [https://opendash.vercel.app](https://opendash.vercel.app)
+
+Le site est déployé sur Vercel et fonctionne parfaitement ! Vous pouvez le visiter dès maintenant pour voir Open-Dash en action.
 
 ## 📋 Prérequis
 

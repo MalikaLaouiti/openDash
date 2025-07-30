@@ -10,8 +10,7 @@ Bienvenue dans la documentation complète d'Open-Dash ! Cette documentation vous
 4. [Guide des Hooks](./hooks.md) - Documentation des hooks personnalisés
 5. [Guide des APIs](./apis.md) - Documentation des APIs intégrées
 6. [Guide de Déploiement](./deploiement.md) - Instructions de déploiement
-7. [Guide de Contribution](./contribution.md) - Comment contribuer au projet
-8. [Troubleshooting](./troubleshooting.md) - Solutions aux problèmes courants
+7. [Troubleshooting](./troubleshooting.md) - Solutions aux problèmes courants
 
 ## 🎯 Vue d'Ensemble
 
