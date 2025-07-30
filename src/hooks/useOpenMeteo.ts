@@ -11,13 +11,13 @@ export interface OpenMeteoData {
   timezone_abbreviation: string;
   elevation: number;
   daily_units: {
-    time: string; // "iso8601"
-    temperature_2m_max: string; // "°C"
-    temperature_2m_min: string; // "°C"
-    precipitation_sum: string; // "mm"
+    time: string; 
+    temperature_2m_max: string; 
+    temperature_2m_min: string; 
+    precipitation_sum: string;
   };
   daily: {
-    time: string[]; // Dates au format ISO
+    time: string[];
     temperature_2m_max: number[];
     temperature_2m_min: number[];
     precipitation_sum: number[];
@@ -26,5 +26,5 @@ export interface OpenMeteoData {
 
 
 export function useOpenMeteo(lat: number, lon: number) {
-  return useApi<OpenMeteoData>(() => apiClient.getOpenMeteo(), [lat, lon]);
+  return useApi<OpenMeteoData>(() => apiClient.getOpenMeteo([lat, lon]), [lat, lon]);
 }

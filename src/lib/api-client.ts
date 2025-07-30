@@ -59,8 +59,8 @@ class ApiClient {
     };
   }
 
-  async getOpenMeteo(): Promise<OpenMeteoData> {
-    const res = await fetch('/api/open-meteo');
+  async getOpenMeteo([lat, lon]: [number, number]): Promise<OpenMeteoData> {
+    const res = await fetch(`/api/open-meteo?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}`);
     if (!res.ok) {
       throw new Error('Failed to fetch weather data');
     }
