@@ -3,9 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=production node server/server.mjs",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:next\"",
+    "dev:server": "cross-env NODE_ENV=development nodemon server/server.mjs",
+    "dev:next": "cross-env NODE_ENV=development next dev",
     "build": "next build",
     "start": "cross-env NODE_ENV=production node server/server.mjs",
+    "start:local": "concurrently \"npm run start:server\" \"npm run start:next\"",
+    "start:server": "cross-env NODE_ENV=production node server/server.mjs",
+    "start:next": "cross-env NODE_ENV=production next start",
     "lint": "next lint"
   },
   "dependencies": {
@@ -38,6 +43,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.21",
+    "concurrently": "^9.2.0",
     "cross-env": "^7.0.3",
     "eslint": "^9",
     "eslint-config-next": "15.3.4",

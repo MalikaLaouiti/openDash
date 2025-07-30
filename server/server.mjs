@@ -164,3 +164,11 @@ app.get('/hello', (req, res) => {
 
 // Export the Express app as a serverless function
 export default app;
+
+// Start the server locally if not in production
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 3001;
+  app.listen(PORT, () => {
+    console.log(`🚀 Serveur Express démarré sur le port ${PORT}`);
+  });
+}
