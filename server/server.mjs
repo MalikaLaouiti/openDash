@@ -1,4 +1,8 @@
 import express from 'express';
+import dotenv from 'dotenv';
+
+// Charger les variables d'environnement depuis .env
+dotenv.config();
 
 const app = express();
 
@@ -22,6 +26,15 @@ app.get('/api/countries', async (req, res) => {
 app.get('/api/weather', async (req, res) => {
   const city = req.query.city || 'Monastir';
   const apiKey = process.env.OPENWEATHERMAP_API_KEY;
+  
+  // Vérifier si la clé API existe
+  if (!apiKey) {
+    console.error('[Weather API Error]: OPENWEATHERMAP_API_KEY manquante dans les variables d\'environnement');
+    return res.status(500).json({ 
+      error: 'Clé API OpenWeather manquante. Veuillez configurer OPENWEATHERMAP_API_KEY dans votre fichier .env.local' 
+    });
+  }
+  
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
   try {
     const response = await fetch(url);
