@@ -122,8 +122,8 @@ export function WeatherChart() {
         ticks: {
           stepSize: 2,
         },
-        suggestedMin: Math.min(...weather!.daily.temperature_2m_min) - 2,
-        suggestedMax: Math.max(...weather!.daily.temperature_2m_max) + 2,
+        suggestedMin: weather ? Math.min(...weather.daily.temperature_2m_min) - 2 : 0,
+        suggestedMax: weather ? Math.max(...weather.daily.temperature_2m_max) + 2 : 10,
       },
     },
 
