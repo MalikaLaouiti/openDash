@@ -2,75 +2,15 @@
 
 Cette section documente tous les composants React utilisés dans Open-Dash.
 
+Open-Dash utilise **shadcn/ui v0** pour créer une interface utilisateur moderne et cohérente.
+Cette approche nous permet de nous concentrer sur la logique métier tout en ayant une interface utilisateur de qualité professionnelle !
+
 ## 📋 Vue d'Ensemble
 
 Les composants sont organisés en deux catégories principales :
-- **Composants UI** : Composants de base réutilisables
+- **Composants UI** : Composants de base réutilisables (shadcn/ui)
 - **Composants Métier** : Composants spécifiques aux fonctionnalités
 
-## 🎨 Composants UI
-
-### Button (`ui/button.tsx`)
-
-Bouton réutilisable avec variantes et tailles.
-
-```tsx
-import { Button } from "@/components/ui/button"
-
-// Utilisation
-<Button variant="default" size="lg">
-  Cliquer ici
-</Button>
-```
-
-**Props :**
-- `variant` : "default" | "destructive" | "outline" | "secondary" | "ghost" | "link"
-- `size` : "default" | "sm" | "lg" | "icon"
-- `children` : Contenu du bouton
-
-### Card (`ui/card.tsx`)
-
-Conteneur de carte avec header, contenu et footer.
-
-```tsx
-import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card"
-
-<Card>
-  <CardHeader>
-    <h3>Titre de la carte</h3>
-  </CardHeader>
-  <CardContent>
-    Contenu de la carte
-  </CardContent>
-  <CardFooter>
-    Actions
-  </CardFooter>
-</Card>
-```
-
-### Input (`ui/input.tsx`)
-
-Champ de saisie stylisé.
-
-```tsx
-import { Input } from "@/components/ui/input"
-
-<Input 
-  type="text" 
-  placeholder="Entrez votre texte"
-  className="w-full"
-/>
-```
-
-### Progress (`ui/progress.tsx`)
-
-Barre de progression.
-
-```tsx
-import { Progress } from "@/components/ui/progress"
-
-<Progress value={75} className="w-full" />
-```
 
 ## 🌍 Composants Géographie
 
@@ -84,17 +24,23 @@ import { WeatherCardReal } from "@/components/weather-card-real"
 <WeatherCardReal />
 ```
 
-**Fonctionnalités :**
-- Affichage température actuelle
-- Conditions météorologiques
-- Humidité et pression
-- Mise à jour automatique
+**🎯 Ce qu'il fait :**
+- Affichage température actuelle avec icônes météo dynamiques
+- Conditions météorologiques détaillées (humidité, pression, vent, visibilité)
+- Informations sur le lever et coucher du soleil
+- Bouton de rafraîchissement intégré
+- Design avec gradient bleu et thème adaptatif
 
-**Hooks utilisés :**
+**🔧 Hooks utilisés :**
 - `useWeather` : Récupération des données météo
 - `useLocation` : Géolocalisation
 
-### MapCard (`map-card.tsx`)
+**💡 Fonctionnalités avancées :**
+- Icônes météo intelligentes selon les conditions
+- Gradient de couleur bleu pour l'identité visuelle
+- Affichage du ressenti thermique
+- Badges pour les conditions météo
+- Interface responsive avec grille adaptative
 
 Carte interactive avec Leaflet.
 
@@ -104,15 +50,27 @@ import { MapCard } from "@/components/map-card"
 <MapCard />
 ```
 
-**Fonctionnalités :**
-- Carte interactive Leaflet
-- Marqueurs de localisation
-- Zoom et déplacement
-- Intégration avec les données météo
+**🎯 Ce qu'il fait :**
+- Carte interactive Leaflet haute performance
+- Marqueurs de localisation dynamiques
+- Contrôles de zoom et déplacement
+- Intégration parfaite avec les données météo
+- Design responsive et moderne
 
-### LocationCard (`location-card.tsx`)
+**🔧 Technologies utilisées :**
+- **Leaflet** : Carte interactive
+- **React-Leaflet** : Intégration React
+- **shadcn/ui** : Interface utilisateur
 
-Informations détaillées de localisation.
+**💡 Fonctionnalités avancées :**
+- Marqueurs personnalisés avec icônes météo
+- Popups informatifs sur les marqueurs
+- Géolocalisation automatique
+- Animations de transition fluides
+
+### LocationCard (`location-card.tsx`) - Notre Expert Localisation
+
+Informations détaillées de localisation avec un design informatif et élégant ! 📍
 
 ```tsx
 import { LocationCard } from "@/components/location-card"
@@ -120,15 +78,29 @@ import { LocationCard } from "@/components/location-card"
 <LocationCard />
 ```
 
-**Fonctionnalités :**
-- Nom de la ville
-- Coordonnées GPS
-- Informations du pays
-- Données démographiques
+**🎯 Ce qu'il fait :**
+- Affichage des informations géographiques complètes
+- Statistiques de population et superficie
+- Informations sur la capitale et le continent
+- Langues officielles du pays
+- Design avec gradient violet et thème adaptatif
 
-### InteractiveMapCard (`interactive-map-card.tsx`)
+**🔧 Hooks utilisés :**
+- `useIpInfo` : Géolocalisation par IP
+- `useCountries` : Informations détaillées des pays
+- `DataLoader` : Affichage du chargement
+- `ErrorAlert` : Gestion des erreurs
 
-Carte interactive avancée avec fonctionnalités étendues.
+**💡 Fonctionnalités avancées :**
+- Détection automatique du pays par IP
+- Affichage des statistiques dans des cartes stylisées
+- Gradient de couleur violet pour l'identité visuelle
+- Bouton de rafraîchissement intégré
+- Interface responsive avec icônes Lucide
+
+### InteractiveMapCard (`interactive-map-card.tsx`) - Notre Carte 3D Avancée
+
+Carte interactive avancée avec fonctionnalités 3D et animations immersives ! 🌍
 
 ```tsx
 import { InteractiveMapCard } from "@/components/interactive-map-card"
@@ -136,11 +108,23 @@ import { InteractiveMapCard } from "@/components/interactive-map-card"
 <InteractiveMapCard />
 ```
 
-**Fonctionnalités :**
-- Carte 3D avec Three.js
-- Animations fluides
-- Interactions avancées
-- Données en temps réel
+**🎯 Ce qu'il fait :**
+- Carte 3D interactive avec Three.js
+- Animations fluides et transitions élégantes
+- Interactions avancées (rotation, zoom, pan)
+- Données en temps réel avec visualisations 3D
+- Expérience utilisateur immersive
+
+**🔧 Technologies utilisées :**
+- **Three.js** : Rendu 3D
+- **React Three Fiber** : Intégration React
+- **shadcn/ui** : Interface utilisateur
+
+**💡 Fonctionnalités avancées :**
+- Contrôles 3D intuitifs
+- Visualisations de données en 3D
+- Animations de chargement sophistiquées
+- Performance optimisée pour le web
 
 ## 📊 Composants de Données
 
@@ -156,6 +140,7 @@ const apis = [
     id: "weather",
     title: "Météo OpenWeatherMap",
     description: "Données météorologiques en temps réel",
+    lastUpdate: "Il y a 2 min",
     status: "active",
     href: "/geography/weather"
   }
@@ -164,8 +149,22 @@ const apis = [
 <ApiGrid apis={apis} />
 ```
 
-**Props :**
-- `apis` : Array d'objets API avec id, title, description, status, href
+**🎯 Ce qu'il fait :**
+- Affichage des APIs dans une grille responsive
+- Indicateurs de statut visuels (actif, inactif, erreur)
+- Horodatage de la dernière mise à jour
+- Navigation vers les pages de détails
+- Design avec hover effects et transitions
+
+**📝 Props :**
+- `apis` : Array d'objets API avec id, title, description, lastUpdate, status, href
+
+**💡 Fonctionnalités avancées :**
+- Icônes de statut dynamiques (Activity, Clock, AlertCircle)
+- Badges colorés pour les statuts
+- Boutons de navigation intégrés
+- Design responsive (1 colonne mobile, 2 tablette, 3 desktop)
+- Transitions fluides au survol
 
 ### CategoryCard (`category-card.tsx`)
 
@@ -328,12 +327,29 @@ Graphique des données météo avec Chart.js.
 ```tsx
 import { WeatherChart } from "@/components/weather-chart"
 
-<WeatherChart data={weatherData} />
+<WeatherChart />
 ```
 
-**Props :**
-- `data` : Données météo pour le graphique
-- `type` : Type de graphique ("line" | "bar" | "radar")
+**🎯 Ce qu'il fait :**
+- Graphique linéaire des températures min/max sur 7 jours
+- Visualisation des précipitations avec tooltips
+- Données en temps réel via Open-Meteo API
+- Interface interactive avec zoom et hover
+- Design responsive et professionnel
+
+**🔧 Hooks utilisés :**
+- `useOpenMeteo` : Données de prévisions météo
+- `WeatherContext` : Gestion du contexte météo
+- `DataLoader` : Affichage du chargement
+- `ErrorAlert` : Gestion des erreurs
+
+**💡 Fonctionnalités avancées :**
+- Graphique Chart.js avec animations fluides
+- Affichage des précipitations avec icônes 💧
+- Tooltips informatifs sur les données
+- Bouton de rafraîchissement intégré
+- Échelles automatiques selon les données
+- Thème adaptatif (clair/sombre)
 
 ### JsonViewer (`json-viewer.tsx`)
 
@@ -342,12 +358,32 @@ Visualiseur JSON pour le débogage.
 ```tsx
 import { JsonViewer } from "@/components/json-viewer"
 
-<JsonViewer data={apiResponse} />
+<JsonViewer 
+  data={apiResponse} 
+  title="Données API"
+  apiUrl="https://api.example.com/data"
+/>
 ```
 
-**Props :**
+**🎯 Ce qu'il fait :**
+- Affichage formaté des données JSON
+- Fonction de copie en un clic
+- Affichage de l'URL de l'API
+- Thème sombre pour une meilleure lisibilité
+- Interface utilisateur intuitive
+
+**📝 Props :**
 - `data` : Données JSON à afficher
-- `collapsed` : État replié/déplié
+- `title` : Titre du visualiseur
+- `apiUrl` : URL de l'API (optionnel)
+
+**💡 Fonctionnalités avancées :**
+- Bouton de copie avec feedback visuel
+- Affichage de l'URL de l'API source
+- Thème sombre avec syntax highlighting
+- Scroll automatique pour les gros fichiers
+- Gestion des états de chargement et d'erreur
+- Icônes Lucide pour une meilleure UX
 
 ## 🚧 Composants en Développement
 
@@ -363,6 +399,18 @@ import { ComingSoon } from "@/components/coming-soon"
   description="Cette fonctionnalité sera bientôt disponible"
 />
 ```
+
+**🎯 Ce qu'il fait :**
+- Affichage élégant des fonctionnalités en développement
+- Design cohérent avec le reste de l'application
+- Message d'encouragement pour les utilisateurs
+- Préparation pour les futures intégrations
+
+**💡 Utilisation :**
+- Sections en cours de développement
+- APIs non encore implémentées
+- Fonctionnalités planifiées
+- Maintenance des pages
 
 ## 📱 Responsive Design
 
