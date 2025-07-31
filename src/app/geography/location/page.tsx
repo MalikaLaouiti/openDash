@@ -3,14 +3,19 @@
 import { useCountries } from "@/hooks/useCountries"
 import { DetailHeader } from "@/components/detail-header"
 import { Suspense } from "react"
-import { LocationDetails } from "@/components/location-details"
 import { JsonViewer } from "@/components/json-viewer";
 import PopulationCard from "@/components/population-card";
+import { CountryDetails } from "@/components/country-details";
+import { useIpInfo } from "@/hooks/useIpInfo";
+import { useWorldBank } from "@/hooks/useWorldBank";
 
 
 
 export default function Page() {
-  const { data: country } = useCountries("TN")
+  const { data: ipInfo } = useIpInfo();
+  const countryCode = ipInfo?.country_code;
+  const { data: country} = useCountries(countryCode)
+  const { data: population} = useWorldBank(countryCode)
 
   return (
       <div className="container mx-auto px-6 py-8">
@@ -28,7 +33,7 @@ export default function Page() {
 
           <div className="space-y-6 ">
             <Suspense fallback={<div>Chargement des détails...</div>}>
-              <LocationDetails />
+              <CountryDetails />
             </Suspense>
           </div>
         </div>
@@ -36,21 +41,21 @@ export default function Page() {
         <div className="mt-8">
           <Suspense fallback={<div>Chargement des données...</div>}>
             <JsonViewer
-              data={country}
-              title=" 📍 Détails de la localisation"
-              apiUrl="/api/countries?code=TN"
+              data={population}
+              title=" 📍 Détails de la population"
+              apiUrl="/api/worldBank"
             />
           </Suspense>
         </div>
-        {/* <div className="mt-8">
-          <Suspense fallback={<div>Chargement des données météo...</div>}>
+        <div className="mt-8">
+          <Suspense fallback={<div>Chargement des données ...</div>}>
             <JsonViewer
-              data={ipData}
-              title="🌍 Infos IP"
-              apiUrl="/api/ipwhois"
+              data={country}
+              title="🌍 Informations pratiques"
+              apiUrl="/api/countries"
             />
           </Suspense>
-        </div> */}
+        </div>
       </div>
   )
 }

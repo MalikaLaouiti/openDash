@@ -32,7 +32,7 @@ export interface Country {
     alt?: string;
   };
   coatOfArms?: {
-    png?: string;
+    png: string;
     svg?: string;
   };
   borders?: string[];
@@ -46,7 +46,7 @@ export interface Country {
       common: string;
     };
   };
-  timeZone?:string[];
+  timezones?:string[];
  
 }
 
