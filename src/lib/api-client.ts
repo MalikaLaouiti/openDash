@@ -197,20 +197,12 @@ class ApiClient {
 
   async getPopulation(countryCode?: string) {
     const code = countryCode || 'TN'; 
-    const res = await fetch(`/api/population?country=${code}`);
+    const res = await fetch(`/api/worldBank?country=${code}`);
     if (!res.ok) {
       throw new Error('Failed to fetch population data');
     } 
     const data = await res.json();
-
-    return {
-      countryiso3code: data.countryiso3code,
-      date: data.date,            
-      value: data.value,    
-      unit: data.unit,            
-      obs_status: data.obs_status,      
-      decimal: data.decimal
-    };
+    return data; 
   }
 
   async getGithubRepos(user = 'vercel') {

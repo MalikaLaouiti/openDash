@@ -5,6 +5,7 @@ export const API_ENDPOINTS: Record<string, string> = {
   openMeteo: '/api/open-meteo',
   locationIQ: '/api/locationiq',
   countries: '/api/countries',
+  worldBank: '/api/worldBank',
   github: '/api/github',
   npm: '/api/npm',
   stackoverflow: '/api/stackoverflow',

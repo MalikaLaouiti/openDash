@@ -5,11 +5,12 @@ import { DetailHeader } from "@/components/detail-header"
 import { Suspense } from "react"
 import { LocationDetails } from "@/components/location-details"
 import { JsonViewer } from "@/components/json-viewer";
+import PopulationCard from "@/components/population-card";
 
 
 
 export default function Page() {
-  const { data: country } = useCountries()
+  const { data: country } = useCountries("TN")
 
   return (
       <div className="container mx-auto px-6 py-8">
@@ -21,7 +22,7 @@ export default function Page() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8 items-stretch">
           <div className="lg:col-span-2 ">
             <Suspense fallback={<div>Chargement de donnees...</div>}>
-              
+              <PopulationCard />
             </Suspense>
           </div>
 
