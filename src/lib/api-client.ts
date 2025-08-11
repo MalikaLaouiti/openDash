@@ -204,10 +204,10 @@ class ApiClient {
     const data = await res.json();
     return data; 
   }
-  
+
   async getNpmPackage(pkg ?: string) {
-   const pack =pkg || 'nextjs';
-   const res = await fetch(`/api/npm?package=${pack}`) ;
+   const pack =pkg ;
+   const res = await fetch(`/api/npm?pkg=${pack}`) ;
    if (!res.ok){
     throw new Error ('Failed to fetch package data');
    }
