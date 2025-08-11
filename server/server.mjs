@@ -112,7 +112,7 @@ app.get('/api/github', async (req, res) => {
 });
 
 app.get('/api/npm', async (req, res) => {
-  const pkg = req.query.pkg || 'react';
+  const pkg = req.query.pkg || 'nextjs';
   try {
     res.json(await (await fetch(`https://registry.npmjs.org/${pkg}`)).json());
   } catch (e) {

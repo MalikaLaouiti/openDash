@@ -204,14 +204,24 @@ class ApiClient {
     const data = await res.json();
     return data; 
   }
+  
+  async getNpmPackage(pkg ?: string) {
+   const pack =pkg || 'nextjs';
+   const res = await fetch(`/api/npm?package=${pack}`) ;
+   if (!res.ok){
+    throw new Error ('Failed to fetch package data');
+   }
+   const data =await res.json();
+   return data;
+
+  }
+
 
   async getGithubRepos(user = 'vercel') {
     return this.request(`${API_ENDPOINTS.github}?user=${user}`);
   }
 
-  async getNpmPackage(pkg = 'react') {
-    return this.request(`${API_ENDPOINTS.npm}?pkg=${pkg}`);
-  }
+ 
 
   async getStackOverflowQuestions(tag = 'javascript') {
     return this.request(`${API_ENDPOINTS.stackoverflow}?tag=${tag}`);
