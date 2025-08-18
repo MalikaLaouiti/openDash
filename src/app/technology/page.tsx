@@ -13,7 +13,7 @@ export default function GeographyPage() {
         description: "Accès aux métadonnées des packages JavaScript et Node.js via registry.npmjs.org",
         lastUpdate: "Il y a 5 min",
         status: "active" as const,
-        href: "/developer/npm",
+        href: "/technology/npm",
     },
     {
         id: "github",
@@ -21,7 +21,7 @@ export default function GeographyPage() {
         description: "Gestion des dépôts, issues, pull requests et données GitHub",
         lastUpdate: "Il y a 10 min",
         status: "active" as const,
-        href: "/developer/github",
+        href: "/technology/github",
     },
     {
         id: "stackoverflow",
@@ -29,7 +29,7 @@ export default function GeographyPage() {
         description: "Recherche et récupération de questions, réponses et tags sur Stack Overflow",
         lastUpdate: "Il y a 15 min",
         status: "active" as const,
-        href: "/developer/stackoverflow",
+        href: "/technology/stackoverflow",
     },
   ]
 

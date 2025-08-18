@@ -19,14 +19,15 @@ export function NpmCardGeneral() {
             <CardHeader className="pb-3">
                 <CardTitle className="flex items-center justify-between">
                     <span className="text-red-900 dark:text-red-100">📦Général information sur npm package </span>
+                    
                 </CardTitle>
             </CardHeader>
             <CardContent>
-                <div className="space-y-2">
-                    <div>
-                        <p className="text-sm text-red-700 dark:text-red-300">
+                <div className="space-y-1">
+                    <p className="text-sm text-red-700 dark:text-red-300 text-center">
                             {npmPackage.name} — {npmPackage.author?.name || "Auteur inconnu"}
-                        </p>
+                    </p>
+                    <div>
                         <p className="text-sm font-bold text-red-900 dark:text-red-100">
                             v{npmPackage.distTags?.latest}
                         </p>
