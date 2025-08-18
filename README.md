@@ -52,7 +52,7 @@ Explorez la section Géographie : [https://opendash.vercel.app/geography](https:
 | Catégorie | Statut | Progression |
 |-----------|--------|-------------|
 | 🌍 Géographie | ✅ Fonctionnel | 100% |
-| 💻 Technologie | 🚧 En développement | 10% |
+| 💻 Technologie | 🚧 En développement | 25% |
 | 🌐 Web & Réseaux | 🚧 En développement | 10% |
 | 📈 Données Économiques | 🚧 En développement | 10% |
 
