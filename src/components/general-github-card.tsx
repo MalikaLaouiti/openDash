@@ -15,7 +15,7 @@ export function GitHubInfoCard() {
     if (!data) return <ErrorAlert error="Aucune donnée disponible." />;
     
   return (
-    <Card className="w-full max-w-md bg-gradient-to-br from-red-50 to-pink-50 border-red-200">
+    <Card className="w-full max-w-md bg-gradient-to-br from-purple-50 to-purple-50 border-red-200">
       <CardHeader className="pb-4">
         <CardTitle className="flex items-center gap-3">
           <Github className="h-6 w-6 text-red-600" />
