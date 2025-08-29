@@ -5,7 +5,7 @@ import { useApi } from './useApi';
 export interface NpmPackage {
   name: string;
   description?: string;
-  distTags?: Record<string, string>; // e.g., { latest: "1.2.3" }
+  distTags?: Record<string, string>; 
   license?: string;
   author?: Author;
   maintainers?: Maintainer[];
@@ -34,7 +34,7 @@ export interface NpmPackage {
     node?: string;
     npm?: string;
   };
-  downloadsLastWeek?: number; // From npm downloads API
+  downloadsLastWeek?: number; 
 }
 
 export interface NpmPackageVersion {

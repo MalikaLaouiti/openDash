@@ -19,6 +19,7 @@
     "@radix-ui/react-tooltip": "^1.2.7",
     "@react-three/drei": "^10.5.0",
     "@react-three/fiber": "^9.2.0",
+    "chart": "^0.1.2",
     "chart.js": "^4.5.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -32,6 +33,7 @@
     "react-chartjs-2": "^5.3.0",
     "react-dom": "^19.0.0",
     "react-leaflet": "^5.0.0",
+    "recharts": "^2.15.4",
     "tailwind-merge": "^3.3.1",
     "three": "^0.178.0"
   },
@@ -43,6 +45,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/recharts": "^1.8.29",
     "autoprefixer": "^10.4.21",
     "concurrently": "^9.2.0",
     "cross-env": "^7.0.3",
