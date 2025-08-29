@@ -8,7 +8,7 @@ import { DataLoader } from "@/components/load-data"
 
 
 export function GitHubInfoCard() {
-    const { data , loading, error } = useGithubOrg('vercel');
+    const { data , loading, error } = useGithubOrg('facebook');
     console.log("GitHub Data:", data);
     if (loading) return <DataLoader message="Chargement de données" />;
     if (error) return <ErrorAlert error={error} />;

@@ -217,8 +217,14 @@ class ApiClient {
   }
 
 
-  async getGithubRepos(user = 'vercel') {
-    return this.request(`${API_ENDPOINTS.github}?user=${user}`);
+  async getGithubRepos(orgName: string) {
+    const org= orgName;
+    const res = await fetch(`/api/github/org?user=${org}`);
+    if (!res.ok) {
+      throw new Error('Failed to fetch GitHub organization data');
+    }
+    const data = await res.json();
+    return data;
   }
 
  

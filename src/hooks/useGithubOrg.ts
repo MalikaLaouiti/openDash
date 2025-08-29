@@ -16,6 +16,6 @@ interface GithubOrg {
 }
 
 
-export function useGithubOrg(org: string = 'vercel') {
+export function useGithubOrg(org: string) {
   return useApi<GithubOrg>(() => apiClient.getGithubRepos(org), [org]);
 }
