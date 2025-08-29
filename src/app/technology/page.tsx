@@ -1,6 +1,6 @@
 import { Suspense } from "react"
-import { NpmCardGeneral } from "@/components/npm-card-general"
-// import { MapCard } from "@/components/map-card"
+import { NpmCardGeneral } from "@/components/general-npm-card"
+ import { GitHubInfoCard } from "@/components/general-github-card"
 // import { LocationCard } from "@/components/location-card"
 import { ApiGrid } from "@/components/api-grid"
 
@@ -48,8 +48,8 @@ export default function GeographyPage() {
             <NpmCardGeneral />
           </Suspense>
 
-          <Suspense fallback={<div>Chargement cartes...</div>}>
-            {/* <MapCard /> */}
+          <Suspense fallback={<div>Chargement GitHub organisation...</div>}>
+            <GitHubInfoCard />
           </Suspense>
 
           <Suspense fallback={<div>Chargement localisation...</div>}>

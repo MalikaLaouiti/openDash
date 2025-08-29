@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+
 dotenv.config();
 
 const app = express();
@@ -98,12 +99,24 @@ app.get('/api/worldBank', async (req, res) => {
   }
 });
 
-app.get('/api/github', async (req, res) => {
-  const user = req.query.user || 'vercel';
+app.get('/api/github/org', async (req, res) => {
+  const org = req.query.user || 'nextjs';
+  console.log("Fetching GitHub organization data for:", org);
+  const url = `https://api.github.com/orgs/${org}`;
+  if (!org) {
+    return res.status(400).json({ error: 'Missing organization name in query parameters' });
+  }
   try {
-    res.json(await (await fetch(`https://api.github.com/users/${user}/repos`)).json());
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    console.log("GitHub Org Data:", data);
+    res.status(200).json(data);
   } catch (e) {
-    res.status(500).json({ error: e.message });
+    console.error('[GitHub API Error]:', e.message);
+    res.status(500).json({ error: 'Failed to fetch data from GitHub API' });
   }
 });
 
