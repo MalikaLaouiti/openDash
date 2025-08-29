@@ -19,7 +19,6 @@ export function NpmCardGeneral() {
             <CardHeader className="pb-3">
                 <CardTitle className="flex items-center justify-between">
                     <span className="text-red-900 dark:text-red-100">📦Général information sur npm package </span>
-                    
                 </CardTitle>
             </CardHeader>
             <CardContent>

@@ -1,5 +1,5 @@
 "use client"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Github, MapPin, Mail, Users, BookOpen, Shield } from "lucide-react"
 import { useGithubOrg } from "@/hooks/useGithubOrg"
@@ -8,7 +8,7 @@ import { DataLoader } from "@/components/load-data"
 
 
 export function GitHubInfoCard() {
-    const { data , loading, error } = useGithubOrg('facebook');
+    const { data , loading, error } = useGithubOrg('vercel');
     console.log("GitHub Data:", data);
     if (loading) return <DataLoader message="Chargement de données" />;
     if (error) return <ErrorAlert error={error} />;
@@ -17,50 +17,50 @@ export function GitHubInfoCard() {
   return (
     <Card className="w-full max-w-md bg-gradient-to-br from-red-50 to-pink-50 border-red-200">
       <CardHeader className="pb-4">
-        <div className="flex items-center gap-3">
+        <CardTitle className="flex items-center gap-3">
           <Github className="h-6 w-6 text-red-600" />
-          <h2 className="text-lg font-semibold text-red-800">Informations générales sur le profil GitHub</h2>
-        </div>
+          <span className="text-red-800 dark:text-red-100 ">Informations générales sur le profil GitHub</span>
+        </CardTitle>
       </CardHeader>
 
       <CardContent className="space-y-4">
         <div className="text-center">
-          <div className="text-red-600 font-medium">
+          <p className="text-red-600 font-medium">
             {data.name} — {data.login}
-          </div>
+          </p>
         </div>
         
         <div className="flex items-center gap-2">
-          <span className="font-medium text-gray-700">ID</span>
-          <span className="text-gray-600">{data.id}</span>
+          <p className="font-medium text-gray-700">ID</p>
+          <p className="text-gray-600">{data.id}</p>
         </div>
 
         <div className="flex items-center gap-2">
           <Mail className="h-4 w-4 text-red-500" />
-          <span className="text-red-600">{data.email}</span>
+          <p className="text-red-600">{data.email}</p>
         </div>
 
         <div className="flex items-center gap-2">
           <MapPin className="h-4 w-4 text-red-500" />
-          <span className="text-red-600">{data.location}</span>
+          <p className="text-red-600">{data.location}</p>
         </div>
 
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <BookOpen className="h-4 w-4 text-red-500" />
-            <span className="text-red-600">{data.public_repos} dépôts publics</span>
+            <p className="text-red-600">{data.public_repos} dépôts publics</p>
           </div>
 
           <div className="flex items-center gap-2">
             <Users className="h-4 w-4 text-red-500" />
-            <span className="text-red-600">{data.followers.toLocaleString()} abonnés</span>
+            <p className="text-red-600">{data.followers.toLocaleString()} abonnés</p>
           </div>
         </div>
 
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Shield className="h-4 w-4 text-red-500" />
-            <span className="text-red-600">Statut de vérification</span>
+            <p className="text-red-600">Statut de vérification</p>
           </div>
 
           <Badge
